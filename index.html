@@ -1,279 +1,459 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard Analista Contable - Marzo 2026</title>
-  <style>
-    :root{--font-ui:"Aptos","Trebuchet MS","Segoe UI",sans-serif;--font-display:"Bahnschrift","Aptos","Trebuchet MS",sans-serif;--bg:linear-gradient(180deg,#f8f1eb 0%,#edf2f7 100%);--shell:rgba(255,255,255,.82);--panel:rgba(255,255,255,.9);--muted:#f7f1ea;--text:#2c313b;--soft:#6c7584;--line:rgba(160,142,128,.18);--shadow:0 22px 50px rgba(113,86,68,.14);--shadow-soft:0 10px 24px rgba(113,86,68,.09);--orange:#ff8a4c;--rose:#eb5577;--gold:#f4c569;--wine:#74456d;--green:#52b788;--sky:#8ec7ff;--red:#ea5b5b}
-    *{box-sizing:border-box;margin:0;padding:0}html,body{min-height:100%}body{font-family:var(--font-ui);color:var(--text);background:var(--bg)}button{font:inherit;border:0;background:none;color:inherit;cursor:pointer}
-    .app{min-height:100vh;padding:16px;display:grid;grid-template-columns:84px 1fr;gap:16px}.sidebar,.workspace,.card{border:1px solid rgba(255,255,255,.72);box-shadow:var(--shadow-soft)}.sidebar{background:linear-gradient(180deg,#fffaf6,#fff);border-radius:28px;padding:16px 0;display:flex;flex-direction:column;align-items:center;justify-content:space-between;position:sticky;top:16px;height:calc(100vh - 32px)}.brand,.nav-btn,.foot{width:46px;height:46px;border-radius:16px;display:grid;place-items:center}.brand{background:linear-gradient(135deg,#fff4ea,#ffe0cc);color:var(--orange);font-weight:800}.nav{display:flex;flex-direction:column;gap:10px}.nav-btn{color:var(--soft)}.nav-btn.active{background:linear-gradient(180deg,rgba(255,238,242,.95),rgba(255,247,250,.95));color:var(--rose);box-shadow:inset 3px 0 0 var(--rose)}.foot{background:#fff;color:var(--wine);font-family:var(--font-display);font-size:.82rem;letter-spacing:.08em}
-    .workspace{background:var(--shell);backdrop-filter:blur(14px);border-radius:32px;overflow:hidden;box-shadow:var(--shadow)}.topbar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;padding:14px 22px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.56)}.left,.right{display:flex;align-items:center;gap:12px}.right{justify-content:flex-end}.icon,.menu{width:40px;height:40px;border-radius:14px;background:rgba(255,255,255,.88);display:grid;place-items:center;box-shadow:var(--shadow-soft);color:var(--soft)}.badge,.user{height:40px;border-radius:15px;background:rgba(255,255,255,.88);display:inline-flex;align-items:center;gap:10px;padding:0 16px;box-shadow:var(--shadow-soft);white-space:nowrap}.badge strong{font-weight:800;color:var(--text)}.period{height:36px;padding:0 18px;border-radius:999px;background:linear-gradient(135deg,var(--wine),#8a4f7e);color:#fff;font-weight:800;box-shadow:0 10px 22px rgba(116,69,109,.28)}.avatar{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#ffd166,#f77f00)}
-    main{padding:22px;display:grid;gap:16px}.card{background:var(--panel);border-radius:22px;overflow:hidden}.hero{padding:22px;display:grid;grid-template-columns:1.25fr .95fr;gap:16px;background:radial-gradient(circle at top left,rgba(255,138,76,.12),transparent 34%),radial-gradient(circle at bottom right,rgba(142,199,255,.14),transparent 36%),linear-gradient(135deg,rgba(255,251,247,.92),rgba(255,255,255,.88))}.eyebrow{display:inline-flex;align-items:center;padding:7px 12px;border-radius:999px;background:rgba(255,138,76,.1);color:#c25f26;font-size:.78rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;margin-bottom:12px}.hero h1{font-family:var(--font-display);font-size:clamp(1.8rem,2vw + 1rem,2.7rem);line-height:1.04;margin-bottom:10px}.hero p{color:var(--soft);line-height:1.55}.hero-stats{margin-top:16px;display:flex;flex-wrap:wrap;gap:12px}.hero-stat{min-width:138px;padding:14px 16px;border-radius:18px;background:rgba(255,255,255,.8)}.hero-stat strong{display:block;font-size:1.15rem;font-weight:800;margin-bottom:4px}.hero-stat span{font-size:.86rem;color:var(--soft)}.hero-stat.primary{min-width:190px;background:linear-gradient(135deg,rgba(235,85,119,.12),rgba(255,138,76,.16));box-shadow:0 14px 28px rgba(235,85,119,.12)}.hero-stat.primary strong{font-size:1.7rem;color:var(--text)}.hero-stat.primary span{display:block;color:#925135;font-weight:700}.hero-stat.primary em{display:block;margin-top:6px;font-style:normal;font-size:.78rem;color:var(--soft)}.hero-side{display:flex;flex-direction:column;gap:14px;justify-content:space-between}.meta{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:10px}.chip{padding:9px 14px;border-radius:999px;background:rgba(255,255,255,.84);font-size:.84rem;font-weight:700;color:var(--soft);box-shadow:var(--shadow-soft)}.chip strong{color:var(--text)}.chip.warn{background:rgba(255,241,231,.95);color:#c96c2a}.chip.ok{background:rgba(234,251,242,.96);color:#2f8f62}
-    .tabs-box{padding:16px;border-radius:20px;background:rgba(255,255,255,.92);display:grid;gap:14px;box-shadow:var(--shadow-soft)}.tabs-head{display:flex;align-items:center;justify-content:space-between;gap:12px}.tabs-head h2,.section-title{font-size:.92rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--soft)}.metric{text-align:right;font-size:.8rem;color:var(--soft)}.metric strong{display:block;font-family:var(--font-display);font-size:1.45rem;line-height:1;color:var(--text);margin-bottom:4px}.tabs{display:flex;flex-wrap:wrap;gap:8px}.tab{flex:1 1 180px;min-height:56px;padding:12px 14px;border-radius:18px;text-align:left;background:var(--muted)}.tab.active{background:linear-gradient(135deg,rgba(255,138,76,.16),rgba(235,85,119,.13));box-shadow:0 14px 28px rgba(235,85,119,.12)}.tab b{display:block;margin-bottom:4px}.tab span{font-size:.82rem;color:var(--soft);line-height:1.35}.note{padding:14px 16px;border-radius:16px;background:#fff7f0;border:1px dashed rgba(255,138,76,.24);color:#a85f2c;font-size:.89rem;line-height:1.45}
-    .kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}.kpi{padding:18px;display:grid;gap:12px;background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(255,251,247,.88))}.kpi-top{display:flex;justify-content:space-between;gap:10px}.kpi-id{padding:6px 10px;border-radius:999px;background:rgba(44,49,59,.06);font-size:.78rem;font-weight:800;text-transform:uppercase}.kpi-meta{font-size:.78rem;color:#9aa2b0;text-align:right}.kpi-body{display:grid;grid-template-columns:1fr 86px;gap:10px;align-items:center}.kpi h3{font-size:.92rem;line-height:1.3;margin-bottom:8px}.value{font-family:var(--font-display);font-size:1.95rem;font-weight:800;line-height:1;margin-bottom:8px}.value small{font-family:var(--font-ui);font-size:.95rem;color:var(--soft);margin-left:6px}.kpi p,.kpi-foot{font-size:.85rem;line-height:1.45;color:var(--soft)}.meter{height:6px;border-radius:999px;background:rgba(44,49,59,.08);overflow:hidden}.meter span{display:block;height:100%;border-radius:inherit}.ring{width:86px;height:86px}
-    .grid-a{display:grid;grid-template-columns:1.05fr 1.35fr .95fr;gap:14px}.grid-b{display:grid;grid-template-columns:1.15fr .95fr;gap:14px}.head{padding:18px 20px 0;display:flex;align-items:flex-start;justify-content:space-between;gap:14px}.sub{margin-top:6px;color:var(--soft);font-size:.87rem;line-height:1.45}
-    .accounts,.reports,.summary{padding:18px 20px 20px;display:grid;gap:10px}.row{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:12px 14px;border-radius:18px;background:rgba(248,242,236,.74)}.code{min-width:74px;padding:7px 10px;border-radius:12px;background:#fff;text-align:center;font-size:.82rem;font-weight:800;color:var(--wine)}.title{font-weight:800;font-size:.92rem;margin-bottom:3px}.small{font-size:.82rem;line-height:1.35;color:var(--soft)}.state{min-width:96px;display:grid;gap:6px;justify-items:end}.pill{min-width:76px;height:30px;padding:0 10px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;font-size:.77rem;font-weight:800;text-transform:uppercase}.pill.ok{background:rgba(82,183,136,.16);color:#2f8f62}.pill.pending{background:rgba(234,91,91,.14);color:#c24343}.track{width:96px;height:6px;border-radius:999px;background:rgba(44,49,59,.08);overflow:hidden}.track span{display:block;height:100%;border-radius:inherit}
-    .chart{padding:16px 20px 20px;display:grid;gap:16px}.plot{height:270px;position:relative;border-radius:20px;background:linear-gradient(to top,rgba(44,49,59,.05) 1px,transparent 1px) 0 100%/100% 25%,linear-gradient(180deg,rgba(255,255,255,.92),rgba(255,248,243,.82));padding:18px 18px 14px}.y{position:absolute;inset:18px auto 14px 10px;width:34px;display:grid;grid-template-rows:repeat(4,1fr);align-items:end;font-size:.75rem;color:#9aa2b0}.bars{margin-left:28px;height:100%;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;align-items:end}.bar{display:grid;justify-items:center;align-items:end;gap:10px}.bar-value{padding:6px 10px;border-radius:12px;background:#fff;box-shadow:var(--shadow-soft);font-size:.84rem;font-weight:800}.bar-track{width:min(64px,100%);height:180px;padding:0 8px;border-radius:18px 18px 10px 10px;background:linear-gradient(180deg,rgba(255,138,76,.08),rgba(255,138,76,.2));display:flex;align-items:flex-end}.bar-fill{width:100%;min-height:18px;border-radius:14px 14px 8px 8px}.bar-label{font-size:.78rem;color:var(--soft);text-align:center;line-height:1.28;min-height:44px}.legend{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 16px}.legend-item{display:flex;align-items:center;gap:10px;font-size:.84rem;color:var(--soft);line-height:1.35}.swatch{width:12px;height:12px;border-radius:4px;flex-shrink:0}
-    .selectable{cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,background-color .18s ease,outline-color .18s ease;outline:2px solid transparent}.selectable:hover{transform:translateY(-1px);box-shadow:0 14px 26px rgba(113,86,68,.12)}.selectable.is-selected{outline-color:rgba(235,85,119,.35);box-shadow:0 18px 30px rgba(235,85,119,.16);background:rgba(255,247,242,.96)}
-    .selection{padding:18px 20px;display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center}.selection-mark{width:14px;height:54px;border-radius:999px;background:var(--orange)}.selection-copy small{display:block;font-size:.78rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);margin-bottom:6px}.selection-copy strong{display:block;font-family:var(--font-display);font-size:1.6rem;line-height:1.05;margin-bottom:6px}.selection-copy p{font-size:.88rem;line-height:1.45;color:var(--soft)}.selection-side{padding:12px 14px;border-radius:16px;background:rgba(248,242,236,.76);text-align:right}.selection-side span{display:block;font-size:.78rem;font-weight:800;color:var(--soft);letter-spacing:.05em;text-transform:uppercase;margin-bottom:4px}.selection-side b{display:block;font-size:.95rem;line-height:1.35}
-    .donut{padding:18px 20px 20px;display:grid;gap:16px;justify-items:center}.donut-wrap{position:relative;width:176px;height:176px}.center{position:absolute;inset:0;display:grid;place-items:center;text-align:center}.center strong{display:block;font-family:var(--font-display);font-size:2rem;line-height:1;margin-bottom:6px}.center span{display:block;max-width:88px;font-size:.84rem;line-height:1.25;color:var(--soft)}.sum{width:100%;display:grid;gap:10px}.sum-item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border-radius:16px;background:rgba(248,242,236,.74);font-size:.88rem}.sum-label{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--soft)}.sum-value{font-weight:800}
-    .report-idx{width:40px;height:40px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(255,138,76,.18),rgba(235,85,119,.15));font-weight:800;color:var(--rose)}.report-status{min-width:84px;padding:10px 12px;border-radius:999px;background:rgba(82,183,136,.16);color:#2f8f62;font-size:.78rem;font-weight:800;text-transform:uppercase;text-align:center}.summary-item{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:18px}.mark{width:8px;border-radius:999px;align-self:stretch}.summary-item strong{display:block;font-size:.93rem;font-weight:800;margin-bottom:4px;line-height:1.35}.summary-item span{font-size:.85rem;line-height:1.45;color:var(--soft)}.tone-success{background:rgba(234,251,242,.94)}.tone-success .mark{background:var(--green)}.tone-warning{background:rgba(255,244,232,.96)}.tone-warning .mark{background:var(--orange)}.tone-neutral{background:rgba(245,245,247,.95)}.tone-neutral .mark{background:#a9afbb}.tone-info{background:rgba(236,245,255,.95)}.tone-info .mark{background:var(--sky)}
-    .footnote{padding:2px 2px 4px;text-align:center;font-size:.82rem;line-height:1.45;color:#97a0ae}
-    @media (max-width:1380px){.kpis{grid-template-columns:repeat(3,minmax(0,1fr))}.grid-a{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-a>.card:last-child{grid-column:1/-1}}
-    @media (max-width:1160px){.app{grid-template-columns:1fr}.sidebar{position:static;height:auto;flex-direction:row;padding:14px 18px}.nav{flex-direction:row}.topbar{grid-template-columns:1fr}.hero,.grid-b{grid-template-columns:1fr}.meta{justify-content:flex-start}.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
-    @media (max-width:760px){.app{padding:10px;gap:10px}.workspace{border-radius:24px}.sidebar{border-radius:24px;padding:12px}.topbar,main{padding:16px}.kpis,.grid-a,.grid-b,.legend{grid-template-columns:1fr}.kpi-body{grid-template-columns:1fr 80px}.row{grid-template-columns:1fr}.state{justify-items:start}.report-status{text-align:left}.bars{gap:8px}.bar-track{width:min(46px,100%)}}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Indicadores Analista Contable — Transporte Nasca Rojim S.R.L.</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0b1121;--bg2:#0f172a;--bg3:#1e293b;--card:#131c2e;--card-border:#1e293b;--accent:#3b82f6;--accent2:#6366f1;--success:#10b981;--warn:#f59e0b;--danger:#ef4444;--cyan:#06b6d4;--text:#e2e8f0;--muted:#64748b;--muted2:#94a3b8;--border:rgba(255,255,255,0.06)}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.top-bar{background:var(--bg2);border-bottom:1px solid var(--border);padding:16px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand .logo{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--success));display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff}
+.brand h1{font-size:1rem;font-weight:700;line-height:1.2}
+.brand h1 span{color:var(--success);font-weight:600}
+.brand small{display:block;font-size:0.65rem;color:var(--muted);font-weight:400}
+.badges{display:flex;gap:8px;flex-wrap:wrap}
+.badge{font-family:'Space Mono',monospace;font-size:0.68rem;padding:6px 14px;border-radius:8px;white-space:nowrap}
+.badge-blue{background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.3);color:var(--accent)}
+.badge-green{background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.3);color:var(--success)}
+.badge-red{background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.3);color:var(--danger)}
+.main{padding:24px 32px;max-width:1400px;margin:0 auto}
+.section-title{font-size:0.62rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted);font-weight:700;margin-bottom:14px;padding-left:2px}
+/* KPI */
+.kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:24px}
+.kc{background:var(--card);border:1px solid var(--card-border);border-radius:12px;padding:18px 20px;position:relative;overflow:hidden}
+.kc::after{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.kc.blue::after{background:var(--accent)}.kc.green::after{background:var(--success)}.kc.red::after{background:var(--danger)}.kc.orange::after{background:var(--warn)}.kc.purple::after{background:var(--accent2)}.kc.cyan::after{background:var(--cyan)}
+.kc-label{font-size:0.68rem;color:var(--muted);font-weight:500;margin-bottom:8px}
+.kc-value{font-family:'Space Mono',monospace;font-size:1.7rem;font-weight:700;line-height:1}
+.kc.blue .kc-value{color:var(--accent)}.kc.green .kc-value{color:var(--success)}.kc.red .kc-value{color:var(--danger)}.kc.orange .kc-value{color:var(--warn)}.kc.purple .kc-value{color:var(--accent2)}.kc.cyan .kc-value{color:var(--cyan)}
+.kc-sub{font-size:0.65rem;color:var(--muted);margin-top:8px;line-height:1.5}
+.kc-sub b{font-weight:600}
+.kc-sub .g{color:var(--success)}.kc-sub .r{color:var(--danger)}.kc-sub .y{color:var(--warn)}.kc-sub .b{color:var(--accent)}
+/* Progress bar */
+.pbar{width:100%;height:6px;border-radius:3px;background:var(--bg);overflow:hidden;margin-top:10px}
+.pbar-fill{height:100%;border-radius:3px;transition:width 0.6s ease}
+/* CUMPLIMIENTO CARD */
+.cumpl-card{background:var(--card);border:1px solid var(--card-border);border-radius:12px;padding:24px;margin-bottom:24px;display:flex;align-items:center;gap:32px}
+.cumpl-ring{position:relative;width:120px;height:120px;flex-shrink:0}
+.cumpl-ring svg{width:120px;height:120px;transform:rotate(-90deg)}
+.cumpl-ring .bg{fill:none;stroke:var(--bg3);stroke-width:10}
+.cumpl-ring .val{fill:none;stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset 1s ease}
+.cumpl-pct{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Space Mono',monospace;font-size:1.6rem;font-weight:700}
+.cumpl-detail{flex:1}
+.cumpl-detail h3{font-size:1rem;font-weight:600;margin-bottom:12px}
+.cumpl-items{display:flex;flex-wrap:wrap;gap:8px}
+.ci{padding:6px 14px;border-radius:8px;font-size:0.72rem;font-weight:600;display:flex;align-items:center;gap:6px}
+.ci .dot{width:8px;height:8px;border-radius:50%}
+.ci-ok{background:rgba(16,185,129,0.1);color:#34d399}.ci-ok .dot{background:#10b981}
+.ci-fail{background:rgba(239,68,68,0.1);color:#f87171}.ci-fail .dot{background:#ef4444}
+.ci-na{background:rgba(100,116,139,0.15);color:var(--muted2)}.ci-na .dot{background:var(--muted)}
+/* Charts */
+.cg{display:grid;gap:14px;margin-bottom:24px}
+.cg.c2{grid-template-columns:1fr 1fr}
+.cg.c3{grid-template-columns:1fr 1fr 1fr}
+.cg.c21{grid-template-columns:2fr 1fr}
+.cp{background:var(--card);border:1px solid var(--card-border);border-radius:12px;padding:18px 20px;overflow:hidden}
+.cp h3{font-size:0.78rem;font-weight:600;margin-bottom:14px;color:var(--text)}
+.cwrap{position:relative;height:280px}
+.cwrap.short{height:220px}
+/* Tables */
+.tp{background:var(--card);border:1px solid var(--card-border);border-radius:12px;padding:18px 20px;margin-bottom:24px;overflow:hidden}
+.tp h3{font-size:0.78rem;font-weight:600;margin-bottom:12px}
+.tw{overflow-x:auto;max-height:420px;overflow-y:auto}
+table{width:100%;border-collapse:collapse;font-size:0.72rem}
+thead th{background:var(--bg3);color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.04em;font-size:0.62rem;padding:9px 12px;text-align:left;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:2}
+tbody td{padding:8px 12px;border-bottom:1px solid var(--border);color:var(--muted2);white-space:nowrap}
+tbody tr:hover td{background:rgba(59,130,246,0.04);color:var(--text)}
+.pill{display:inline-block;padding:2px 10px;border-radius:20px;font-size:0.62rem;font-weight:600}
+.pill-green{background:rgba(16,185,129,0.15);color:#34d399}
+.pill-red{background:rgba(239,68,68,0.15);color:#f87171}
+.pill-yellow{background:rgba(245,158,11,0.15);color:#fbbf24}
+.pill-blue{background:rgba(59,130,246,0.15);color:#60a5fa}
+.pill-purple{background:rgba(99,102,241,0.15);color:#a78bfa}
+.pill-gray{background:rgba(100,116,139,0.15);color:var(--muted2)}
+.mono{font-family:'Space Mono',monospace}
+/* Funciones grid */
+.func-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-bottom:24px}
+.func-card{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:16px;transition:transform 0.2s}
+.func-card:hover{transform:translateY(-2px)}
+.func-icon{font-size:1.2rem;margin-bottom:8px}
+.func-card h4{font-size:0.78rem;font-weight:600;margin-bottom:6px}
+.func-card p{font-size:0.68rem;color:var(--muted2);line-height:1.6}
+.func-tag{display:inline-block;font-size:0.58rem;padding:2px 8px;border-radius:4px;font-weight:600;margin-top:8px}
+.footer{text-align:center;padding:20px 32px;color:var(--muted);font-size:0.68rem;border-top:1px solid var(--border)}
+@media(max-width:900px){.kpi-row{grid-template-columns:repeat(2,1fr)}.cg.c2,.cg.c21,.cg.c3{grid-template-columns:1fr}.cumpl-card{flex-direction:column;text-align:center}}
+</style>
 </head>
 <body>
-  <div class="app">
-    <aside class="sidebar" aria-label="Navegación lateral">
-      <div class="brand">IND</div>
-      <nav class="nav">
-        <button class="nav-btn" type="button" aria-label="Vista general">≡</button>
-        <button class="nav-btn" type="button" aria-label="Categorías">◫</button>
-        <button class="nav-btn active" type="button" aria-label="Indicadores">◉</button>
-        <button class="nav-btn" type="button" aria-label="Reportes">▤</button>
-        <button class="nav-btn" type="button" aria-label="Configuración">⚙</button>
-      </nav>
-      <div class="foot">FIN</div>
-    </aside>
-    <div class="workspace">
-      <header class="topbar">
-        <div class="left">
-          <div class="menu">☰</div>
-          <div class="badge"><strong id="topRole">Analista Contable</strong><span>· Dashboard offline</span></div>
-        </div>
-        <button class="period" id="topPeriod" type="button">Marzo 2026</button>
-        <div class="right">
-          <div class="icon">✉</div>
-          <div class="icon">▣</div>
-          <div class="user"><span class="avatar" aria-hidden="true"></span><span>Control financiero</span></div>
-        </div>
-      </header>
-      <main id="view"></main>
-    </div>
+
+<div class="top-bar">
+  <div class="brand">
+    <div class="logo">TR</div>
+    <h1>Transporte Nasca <span>Rojim S.R.L.</span><small>Dashboard Indicadores — Analista Contable</small></h1>
   </div>
-  <script>
-    const analista = {
-      titulo: "Analista Contable",
-      periodo: "Marzo 2026",
-      subtitulo: "Seguimiento visual de cuentas críticas, activos fijos, depreciación y reportes con base en la foto fija del Excel actual.",
-      demo: false,
-      fuente: "Fuente oficial: INDICADORES - ANALISTA CONTABLE.xlsx · foto fija al 27/03/2026.",
-      notaDemo: "",
-      heroStats: [
-        { valor: "8/14", etiqueta: "Cuentas críticas revisadas" },
-        { valor: "97", etiqueta: "Activos evaluados y controlados" },
-        { valor: "2/2", etiqueta: "Reportes emitidos" }
-      ],
-      kpis: [
-        { id: "IND 1", label: "Análisis de cuentas críticas", value: "8 / 14", unit: "cuentas", percent: 57, meta: "Meta: 100%", desc: "Cuentas críticas analizadas del total priorizado.", foot: "3 OK · 5 FALTA", color: "#eb5577" },
-        { id: "IND 2", label: "Depreciación correcta", value: "97", unit: "activos", percent: 100, meta: "Meta: 100%", desc: "Conteo consolidado desde el detalle del Excel.", foot: "Distribución en 6 categorías", color: "#74456d" },
-        { id: "IND 3", label: "Control de activos fijos", value: "97", unit: "activos", percent: 100, meta: "Meta: 100%", desc: "Activos controlados con la misma base de categorías.", foot: "Control total vigente", color: "#52b788" },
-        { id: "IND 4", label: "Margen por ruta", value: "N/D", unit: "", percent: null, meta: "Meta: >= 15%", desc: "Sin datos de ingresos y costos de ruta.", foot: "Pendiente de carga operativa", color: "#f4c569" },
-        { id: "IND 5", label: "Reportes analíticos", value: "2 / 2", unit: "emitidos", percent: 100, meta: "Meta: 100%", desc: "Reportes de compras y ventas registrados.", foot: "Emitidos el 16 mar 2026", color: "#ff8a4c" }
-      ],
-      categoriasActivos: [
-        { short: "Transporte", label: "Unidades de transporte", value: 37, color: "#ff8a4c" },
-        { short: "Llantas", label: "Llantas vehículos", value: 23, color: "#eb5577" },
-        { short: "Repuestos", label: "Repuestos vehículos", value: 8, color: "#74456d" },
-        { short: "Muebles", label: "Muebles", value: 5, color: "#f4c569" },
-        { short: "Cómputo", label: "Equipos de cómputo", value: 15, color: "#52b788" },
-        { short: "Telecom.", label: "Equipos de telecomunicaciones", value: 9, color: "#8ec7ff" }
-      ],
-      cuentasCriticas: [
-        { cuenta: "101101", descripcion: "Caja", glosa: "Caja chica", estado: "OK" },
-        { cuenta: "122102", descripcion: "Anticipos de clientes terceros M.E.", glosa: "Devol. parte siniestro", estado: "FALTA" },
-        { cuenta: "141101", descripcion: "Préstamos de personal empleados M.N.", glosa: "Préstamo al personal", estado: "OK" },
-        { cuenta: "141301", descripcion: "Entregas a rendir cuenta de personal M.N.", glosa: "Viáticos al personal", estado: "OK" },
-        { cuenta: "182105", descripcion: "Seguro vehicular", glosa: "Diveimport", estado: "FALTA" },
-        { cuenta: "373102", descripcion: "Intereses diferidos", glosa: "Diveimport", estado: "FALTA" },
-        { cuenta: "421202", descripcion: "Facturas emitidas por pagar M.E. terceros", glosa: "Voltrailer", estado: "FALTA" },
-        { cuenta: "461102", descripcion: "Reclamaciones de terceros M.E.", glosa: "Diveimport", estado: "FALTA" }
-      ],
-      reportes: [
-        { item: 1, descripcion: "Reporte de compras diciembre 2025", fecha: "2026-03-16", estado: "Emitido" },
-        { item: 2, descripcion: "Reporte de ventas diciembre 2025", fecha: "2026-03-16", estado: "Emitido" }
-      ],
-      resumen: [
-        { tone: "success", title: "IND 2 e IND 3 usan 97 activos", text: "La vista se recalculó desde el Excel actual y ya no muestra el valor anterior de 109." },
-        { tone: "warning", title: "Quedan 5 cuentas críticas pendientes", text: "Siguen marcadas como FALTA las cuentas de anticipos, seguro vehicular, intereses diferidos, facturas por pagar y reclamaciones." },
-        { tone: "neutral", title: "IND 4 sigue sin información de ruta", text: "La hoja no trae ingresos ni costos, por eso el indicador se mantiene en N/D." },
-        { tone: "info", title: "Los 2 reportes ya fueron emitidos", text: "Compras y ventas de diciembre 2025 figuran con fecha 16 de marzo de 2026." }
-      ]
-    };
+  <div class="badges">
+    <div class="badge badge-blue">Periodo: Marzo 2026</div>
+    <div class="badge badge-green" id="updateBadge"></div>
+  </div>
+</div>
 
-    const dashboardData = {
-      analista,
-      asistente: {
-        ...JSON.parse(JSON.stringify(analista)),
-        titulo: "Asistente Contable",
-        subtitulo: "Vista temporal del rol asistente con el mismo comportamiento del dashboard final mientras llega su Excel real.",
-        demo: true,
-        fuente: "Fuente temporal: réplica del dataset del Analista Contable hasta recibir el archivo del Asistente.",
-        notaDemo: "Demo temporal: esta pestaña reutiliza la data del Analista Contable. Cuando llegue el Excel del asistente solo habrá que reemplazar este bloque.",
-        resumen: [
-          { tone: "info", title: "Pestaña de Asistente en modo demo", text: "La navegación, el layout y los componentes ya están listos, pero el dataset sigue siendo temporal." },
-          { tone: "success", title: "La maqueta conserva los KPI oficiales", text: "Esta demo mantiene 97 activos en IND 2 e IND 3, 8/14 cuentas revisadas y 2/2 reportes emitidos." },
-          { tone: "warning", title: "Falta la data real del asistente", text: "Apenas se entregue su archivo, esta pestaña podrá reemplazar el badge demo y cargar sus propios indicadores." },
-          { tone: "neutral", title: "IND 4 también queda en espera", text: "Sin información de rutas, el indicador continúa marcado como N/D en ambas pestañas." }
-        ]
-      }
-    };
+<div class="main">
 
-    const roles = [
-      { id: "analista", title: "Analista Contable", subtitle: "Datos oficiales del Excel actual" },
-      { id: "asistente", title: "Asistente Contable", subtitle: "Maqueta temporal con badge demo" }
-    ];
+<!-- CUMPLIMIENTO GLOBAL -->
+<div class="section-title">Cumplimiento global de indicadores</div>
+<div class="cumpl-card" id="cumplCard"></div>
 
-    const state = { role: "analista" };
-    const view = document.getElementById("view");
-    const topRole = document.getElementById("topRole");
-    const topPeriod = document.getElementById("topPeriod");
+<!-- KPIs -->
+<div class="section-title">Resumen de indicadores</div>
+<div class="kpi-row" id="kpiRow"></div>
 
-    const esc = (v) => String(v).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
-    const fmtDate = (iso) => new Intl.DateTimeFormat("es-PE",{day:"2-digit",month:"short",year:"numeric"}).format(new Date(iso + "T00:00:00"));
-    const fmtPercentDecimal = (value) => new Intl.NumberFormat("es-PE",{minimumFractionDigits:1,maximumFractionDigits:1}).format(value) + "%";
-    const width = (p) => p === null ? 0 : Math.max(0, Math.min(100, p));
-    const pct = (p) => p === null ? "N/D" : p + "%";
-    const status = (p) => p === null ? "pending" : p >= 100 ? "complete" : "partial";
-    const payloadAttr = (payload) => `data-payload='${esc(JSON.stringify(payload))}'`;
-    const complianceMetrics = (kpis) => {
-      const total = kpis.length || 1;
-      const measuredCount = kpis.filter((k) => k.percent !== null).length;
-      const noDataCount = total - measuredCount;
-      const completeCount = kpis.filter((k) => k.percent === 100).length;
-      const summedPercent = kpis.reduce((sum, k) => sum + (k.percent === null ? 0 : k.percent), 0);
-      const average = summedPercent / total;
-      const progressColor = average >= 100 ? "#52b788" : average >= 80 ? "#ff8a4c" : "#eb5577";
-      return { total, measuredCount, noDataCount, completeCount, average, progressColor };
-    };
+<!-- CHARTS ROW 1 -->
+<div class="section-title">Análisis visual</div>
+<div class="cg c2">
+  <div class="cp"><h3>Resultado Actual vs Meta (%)</h3><div class="cwrap"><canvas id="ch1"></canvas></div></div>
+  <div class="cp"><h3>Cumplimiento por Indicador</h3><div class="cwrap"><canvas id="ch2"></canvas></div></div>
+</div>
 
-    function ring(percent, color) {
-      const r = 31;
-      const c = 2 * Math.PI * r;
-      const d = percent === null ? 0 : width(percent) / 100 * c;
-      return `<svg class="ring" viewBox="0 0 86 86" aria-hidden="true"><circle cx="43" cy="43" r="${r}" fill="none" stroke="rgba(44,49,59,.08)" stroke-width="8"></circle><circle cx="43" cy="43" r="${r}" fill="none" stroke="${color}" stroke-width="8" stroke-linecap="round" stroke-dasharray="${d} ${c - d}" transform="rotate(-90 43 43)"></circle><text x="43" y="47" text-anchor="middle" fill="#2c313b" font-size="14" font-weight="800">${pct(percent)}</text></svg>`;
-    }
+<!-- CHARTS ROW 2 -->
+<div class="cg c3">
+  <div class="cp"><h3>IND 1 — Cuentas Críticas</h3><div class="cwrap short"><canvas id="ch3"></canvas></div></div>
+  <div class="cp"><h3>IND 2 — Activos por Categoría</h3><div class="cwrap short"><canvas id="ch4"></canvas></div></div>
+  <div class="cp"><h3>IND 3 — Control Activos Fijos</h3><div class="cwrap short"><canvas id="ch5"></canvas></div></div>
+</div>
 
-    function renderSelection(payload) {
-      if (!payload) {
-        return `<section class="card"><div class="selection"><span class="selection-mark" aria-hidden="true"></span><div class="selection-copy"><small>Valor seleccionado</small><strong>Sin selección</strong><p>Haz clic en un KPI, una fila de cuentas, una barra de categorías o un reporte para ver su valor y detalle aquí.</p></div><div class="selection-side"><span>Detalle</span><b>Esperando interacción</b></div></div></section>`;
-      }
-      return `<section class="card"><div class="selection"><span class="selection-mark" aria-hidden="true" style="background:${esc(payload.color || "#ff8a4c")}"></span><div class="selection-copy"><small>${esc(payload.section || "Valor seleccionado")}</small><strong>${esc(payload.value || "Sin valor")}</strong><p>${esc(payload.label || "")}${payload.detail ? `<br>${esc(payload.detail)}` : ""}</p></div><div class="selection-side"><span>${esc(payload.sideLabel || "Detalle")}</span><b>${esc(payload.sideValue || "Sin dato adicional")}</b></div></div></section>`;
-    }
+<!-- DETAIL TABLE IND 1 -->
+<div class="tp">
+  <h3>IND 1 — Detalle Análisis de Cuentas Críticas <span style="color:var(--warn);font-size:0.68rem;margin-left:8px">(14 cuentas / 8 analizadas)</span></h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Cuenta</th><th>Descripción</th><th>Glosa</th><th>Estado</th></tr></thead>
+      <tbody id="tbInd1"></tbody>
+    </table>
+  </div>
+</div>
 
-    function renderTabs(active) {
-      return roles.map((r) => `<button class="tab ${r.id === active ? "active" : ""}" type="button" data-role="${r.id}" role="tab" aria-selected="${r.id === active}"><b>${esc(r.title)}</b><span>${esc(r.subtitle)}</span></button>`).join("");
-    }
+<!-- IND 2 & IND 3 SUMMARY TABLE -->
+<div class="cg c2">
+  <div class="tp" style="margin-bottom:0">
+    <h3>IND 2 — Activos Evaluados por Categoría <span style="color:var(--success);font-size:0.68rem;margin-left:8px">(97 activos)</span></h3>
+    <div class="tw"><table><thead><tr><th>Categoría</th><th>Cantidad</th><th>% del Total</th></tr></thead><tbody id="tbInd2"></tbody></table></div>
+  </div>
+  <div class="tp" style="margin-bottom:0">
+    <h3>IND 5 — Reportes Analíticos Emitidos <span style="color:var(--success);font-size:0.68rem;margin-left:8px">(2 reportes)</span></h3>
+    <div class="tw"><table><thead><tr><th>#</th><th>Descripción</th><th>Fecha Emisión</th><th>Estado</th></tr></thead><tbody id="tbInd5"></tbody></table></div>
+  </div>
+</div>
 
-    function renderKpis(items) {
-      return items.map((k) => `<article class="card kpi selectable" tabindex="0" role="button" ${payloadAttr({ section: k.id, value: k.value + (k.unit ? " " + k.unit : ""), label: k.label, detail: k.desc, sideLabel: "Avance", sideValue: pct(k.percent), color: k.color })}><div class="kpi-top"><span class="kpi-id">${esc(k.id)}</span><span class="kpi-meta">${esc(k.meta)}</span></div><div class="kpi-body"><div><h3>${esc(k.label)}</h3><div class="value" style="color:${esc(k.color)}">${esc(k.value)}${k.unit ? `<small>${esc(k.unit)}</small>` : ""}</div><p>${esc(k.desc)}</p></div>${ring(k.percent, k.color)}</div><div class="meter"><span style="width:${width(k.percent)}%;background:${esc(k.color)}"></span></div><div class="kpi-foot">${esc(k.foot)}</div></article>`).join("");
-    }
+<!-- DETAIL TABLE ALL INDICATORS -->
+<div class="tp" style="margin-top:24px">
+  <h3>Matriz de Indicadores — Analista Contable</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Item</th><th>Indicador</th><th>Fórmula</th><th>Numerador</th><th>Denominador</th><th>Resultado</th><th>Meta</th><th>Estado</th></tr></thead>
+      <tbody id="tbMatriz"></tbody>
+    </table>
+  </div>
+</div>
 
-    function renderAccounts(items) {
-      return items.map((a) => {
-        const ok = a.estado === "OK";
-        return `<div class="row selectable" tabindex="0" role="button" ${payloadAttr({ section: "Cuenta crítica", value: a.estado, label: a.cuenta + " · " + a.descripcion, detail: a.glosa, sideLabel: "Cuenta", sideValue: a.cuenta, color: ok ? "#52b788" : "#ea5b5b" })}><div class="code">${esc(a.cuenta)}</div><div><div class="title">${esc(a.descripcion)}</div><div class="small">${esc(a.glosa)}</div></div><div class="state"><span class="pill ${ok ? "ok" : "pending"}">${esc(a.estado)}</span><span class="track"><span style="width:${ok ? 100 : 42}%;background:${ok ? "#52b788" : "#ea5b5b"}"></span></span></div></div>`;
-      }).join("");
-    }
+<!-- FUNCIONES -->
+<div class="section-title" style="margin-top:24px">Funciones del analista contable</div>
+<div class="func-grid" id="funcGrid"></div>
 
-    function renderChart(items) {
-      const max = Math.max(...items.map((i) => i.value), 1);
-      return `<div class="plot"><div class="y"><span>40</span><span>30</span><span>20</span><span>10</span></div><div class="bars">${items.map((i) => `<div class="bar selectable" tabindex="0" role="button" ${payloadAttr({ section: "Activos por categoría", value: i.value + " activos", label: i.label, detail: "Participación visual en IND 2 e IND 3.", sideLabel: "Categoría", sideValue: i.short, color: i.color })}><div class="bar-value">${esc(i.value)}</div><div class="bar-track"><div class="bar-fill" style="height:${Math.max(18, Math.round(i.value / max * 100))}%;background:${esc(i.color)}"></div></div><div class="bar-label">${esc(i.short)}</div></div>`).join("")}</div></div><div class="legend">${items.map((i) => `<div class="legend-item"><span class="swatch" style="background:${esc(i.color)}"></span><span>${esc(i.label)} (${esc(i.value)})</span></div>`).join("")}</div>`;
-    }
+</div>
 
-    function renderDonut(kpis) {
-      const { total, measuredCount, noDataCount, completeCount, average, progressColor } = complianceMetrics(kpis);
-      const r = 54;
-      const c = 2 * Math.PI * r;
-      const dash = average / 100 * c;
-      const summary = [
-        { label: "Cumplimiento total", value: fmtPercentDecimal(average), color: progressColor },
-        { label: "Indicadores considerados", value: total + "/" + total, color: "#74456d" },
-        { label: "Indicadores al 100%", value: fmtPercentDecimal(completeCount / total * 100), color: "#52b788" },
-        { label: "Sin data", value: fmtPercentDecimal(noDataCount / total * 100), color: "#f4c569" }
-      ];
-      return `<div class="donut-wrap"><svg viewBox="0 0 176 176" width="176" height="176" aria-hidden="true"><circle cx="88" cy="88" r="${r}" fill="none" stroke="rgba(44,49,59,.08)" stroke-width="16"></circle><circle cx="88" cy="88" r="${r}" fill="none" stroke="${progressColor}" stroke-width="16" stroke-linecap="round" stroke-dasharray="${dash} ${c - dash}" transform="rotate(-90 88 88)"></circle></svg><div class="center"><div><strong>${fmtPercentDecimal(average)}</strong><span>Cumplimiento total</span></div></div></div><div class="sum">${summary.map((m) => `<div class="sum-item"><div class="sum-label"><span class="swatch" style="background:${m.color}"></span><span>${m.label}</span></div><span class="sum-value">${m.value}</span></div>`).join("")}</div>`;
-    }
+<div class="footer">Transporte Nasca Rojim S.R.L. | Dashboard Indicadores Analista Contable | Generado: <span id="genDate"></span></div>
 
-    function renderReports(items) {
-      return items.map((r) => `<div class="row selectable" tabindex="0" role="button" ${payloadAttr({ section: "Reporte analítico", value: r.estado, label: r.descripcion, detail: "Fecha de emisión: " + fmtDate(r.fecha), sideLabel: "Ítem", sideValue: "#" + r.item, color: "#52b788" })}><div class="report-idx">${esc(r.item)}</div><div><div class="title">${esc(r.descripcion)}</div><div class="small">Emitido: ${fmtDate(r.fecha)}</div></div><span class="report-status">${esc(r.estado)}</span></div>`).join("");
-    }
+<script>
+Chart.defaults.color='#64748b';
+Chart.defaults.borderColor='rgba(255,255,255,0.04)';
+Chart.defaults.font.family="'DM Sans',sans-serif";
+const TP={backgroundColor:'#1e293b',titleColor:'#fff',bodyColor:'#94a3b8',borderColor:'rgba(255,255,255,0.08)',borderWidth:1,cornerRadius:8,padding:10};
+const GY={color:'rgba(255,255,255,0.04)'};
+const NG={display:false};
+const CL=['#3b82f6','#10b981','#f59e0b','#ef4444','#6366f1','#06b6d4'];
 
-    function renderSummary(items) {
-      return items.map((i) => `<div class="summary-item tone-${esc(i.tone)}"><span class="mark" aria-hidden="true"></span><div><strong>${esc(i.title)}</strong><span>${esc(i.text)}</span></div></div>`).join("");
-    }
+// ════════════════════════════════════════
+// DATA FROM EXCEL
+// ════════════════════════════════════════
+const DATA = {
+  ind1: {
+    name: 'Análisis de Cuentas Críticas',
+    formula: '(#Ctas Críticas Analizadas / #Ctas Críticas Totales) × 100',
+    totalCtas: 14,
+    analizadas: 8,
+    ok: 3,
+    falta: 5,
+    meta: 100,
+    metaLabel: '100%',
+    cuentasCriticas: [
+      {num:10,desc:'Efectivo y equivalentes de efectivo'},
+      {num:12,desc:'Cuentas por cobrar comerciales - Terceros'},
+      {num:14,desc:'Cuentas por cobrar al personal, socios, directores'},
+      {num:16,desc:'Cuentas por cobrar diversas - Terceros'},
+      {num:18,desc:'Servicios y otros contratados por anticipado'},
+      {num:33,desc:'Inmuebles, maquinaria y equipo'},
+      {num:34,desc:'Intangibles'},
+      {num:37,desc:'Activo diferido'},
+      {num:39,desc:'Depreciación, amortización y agotamiento'},
+      {num:40,desc:'Tributos y aportes al sistema de pensiones'},
+      {num:41,desc:'Remuneraciones y participaciones por pagar'},
+      {num:42,desc:'Cuentas por pagar comerciales - Terceros'},
+      {num:44,desc:'Cuentas por pagar a socios, directores'},
+      {num:46,desc:'Cuentas por pagar diversas - Terceros'}
+    ],
+    detalle: [
+      {cuenta:101101,desc:'CAJA',glosa:'CAJA CHICA',estado:'OK'},
+      {cuenta:122102,desc:'ANTICIPOS DE CLIENTES TERCEROS M.E.',glosa:'DEVOL. PARTE SINIESTRO',estado:'FALTA'},
+      {cuenta:141101,desc:'PRESTAMOS DE PERSONAL EMPLEADOS M.N',glosa:'PRÉSTAMO AL PERSONAL',estado:'OK'},
+      {cuenta:141301,desc:'ENTREGAS A RENDIR CUENTA PERSONAL M.N.',glosa:'VIÁTICOS AL PERSONAL',estado:'OK'},
+      {cuenta:182105,desc:'SEGURO VEHICULAR',glosa:'DIVEIMPORT',estado:'FALTA'},
+      {cuenta:373102,desc:'INTERÉS DIFERIDOS',glosa:'DIVEIMPORT',estado:'FALTA'},
+      {cuenta:421202,desc:'FACTURAS EMITIDAS POR PAGAR M.E. TERCEROS',glosa:'VOLTRAILER',estado:'FALTA'},
+      {cuenta:461102,desc:'RECLAMACIONES DE TERCEROS M.E',glosa:'DIVEIMPORT',estado:'FALTA'}
+    ]
+  },
+  ind2: {
+    name: 'Depreciación Correcta',
+    formula: '(#Activos Evaluados / #Activos con Deprec. Correcta) × 100',
+    totalEvaluados: 97,
+    correctos: 97,
+    meta: 100,
+    metaLabel: '100%',
+    categorias: [
+      {cat:'Unidades de Transporte',cant:37},
+      {cat:'Llantas Vehículos',cant:23},
+      {cat:'Equipos de Cómputo',cant:15},
+      {cat:'Equipos de Telecomunicaciones',cant:9},
+      {cat:'Repuestos Vehículos',cant:8},
+      {cat:'Muebles',cant:5}
+    ]
+  },
+  ind3: {
+    name: 'Control de Activos Fijos',
+    formula: '(#Activos Controlados / #Activos Totales) × 100',
+    totalActivos: 97,
+    controlados: 97,
+    meta: 100,
+    metaLabel: '100%',
+    categorias: [
+      {cat:'Unidades de Transporte',cant:37},
+      {cat:'Llantas Vehículos',cant:23},
+      {cat:'Equipos de Cómputo',cant:15},
+      {cat:'Equipos de Telecomunicaciones',cant:9},
+      {cat:'Repuestos Vehículos',cant:8},
+      {cat:'Muebles',cant:5}
+    ]
+  },
+  ind4: {
+    name: 'Margen por Ruta',
+    formula: '(Ingreso Ruta - Costo Ruta) / Ingreso Ruta × 100',
+    resultado: null,
+    meta: 15,
+    metaLabel: '≥ 15%'
+  },
+  ind5: {
+    name: 'Reportes Analíticos',
+    formula: '(#Reportes Emitidos / #Reportes Programados) × 100',
+    programados: 2,
+    emitidos: 2,
+    meta: 100,
+    metaLabel: '100%',
+    reportes: [
+      {num:1,desc:'Reporte de Compras Diciembre 2025',fecha:'16/03/2026'},
+      {num:2,desc:'Reporte de Ventas Diciembre 2025',fecha:'16/03/2026'}
+    ]
+  }
+};
 
-    function render(roleId) {
-      const data = dashboardData[roleId];
-      const ok = data.cuentasCriticas.filter((i) => i.estado === "OK").length;
-      const pending = data.cuentasCriticas.length - ok;
-      const activos = data.categoriasActivos.reduce((n, i) => n + i.value, 0);
-      const compliance = complianceMetrics(data.kpis);
-      document.title = `Dashboard ${data.titulo} - ${data.periodo}`;
-      topRole.textContent = data.titulo;
-      topPeriod.textContent = data.periodo;
-      view.innerHTML = `
-        <section class="card hero">
-          <div>
-            <div class="eyebrow">Dashboard local · roles contables</div>
-            <h1>${esc(data.titulo)}</h1>
-            <p>${esc(data.subtitulo)}</p>
-            <div class="hero-stats"><div class="hero-stat primary"><strong>${fmtPercentDecimal(compliance.average)}</strong><span>Cumplimiento total de indicadores</span><em>Considerando los ${data.kpis.length} indicadores</em></div>${data.heroStats.map((s) => `<div class="hero-stat"><strong>${esc(s.valor)}</strong><span>${esc(s.etiqueta)}</span></div>`).join("")}</div>
-          </div>
-          <div class="hero-side">
-            <div class="meta"><span class="chip"><strong>${esc(data.periodo)}</strong></span><span class="chip ${data.demo ? "warn" : "ok"}">${data.demo ? "Demo temporal" : "Datos oficiales"}</span><span class="chip">Excel offline</span></div>
-            <div class="tabs-box">
-              <div class="tabs-head"><h2>Pestañas del dashboard</h2><div class="metric"><strong>${activos}</strong>Activos</div></div>
-              <div class="tabs" role="tablist" aria-label="Pestañas por rol">${renderTabs(roleId)}</div>
-              <div class="note">${esc(data.demo ? data.notaDemo : data.fuente)}</div>
-            </div>
-          </div>
-        </section>
-        ${renderSelection(null)}
-        <section class="kpis">${renderKpis(data.kpis)}</section>
-        <section class="grid-a">
-          <article class="card"><div class="head"><div><div class="section-title">IND 1 · Cuentas críticas</div><div class="sub">Detalle de las 8 cuentas revisadas del universo crítico actual.</div></div><div class="metric"><strong>${ok}/${pending}</strong>OK / Falta</div></div><div class="accounts">${renderAccounts(data.cuentasCriticas)}</div></article>
-          <article class="card"><div class="head"><div><div class="section-title">IND 2 e IND 3 · Activos por categoría</div><div class="sub">Conteos reales del detalle de depreciación y control de activos.</div></div><div class="metric"><strong>${activos}</strong>Total consolidado</div></div><div class="chart">${renderChart(data.categoriasActivos)}</div></article>
-          <article class="card"><div class="head"><div><div class="section-title">Lectura rápida</div><div class="sub">Cumplimiento total considerando los 5 indicadores; los que no tienen dato aportan 0%.</div></div></div><div class="donut">${renderDonut(data.kpis)}</div></article>
-        </section>
-        <section class="grid-b">
-          <article class="card"><div class="head"><div><div class="section-title">IND 5 · Reportes analíticos</div><div class="sub">Programación y emisión registrada en la hoja de reportes.</div></div><div class="metric"><strong>${data.reportes.length}/${data.reportes.length}</strong>Emitidos</div></div><div class="reports">${renderReports(data.reportes)}</div></article>
-          <article class="card"><div class="head"><div><div class="section-title">Resumen ejecutivo</div><div class="sub">Hallazgos rápidos para revisar sin abrir el Excel.</div></div></div><div class="summary">${renderSummary(data.resumen)}</div></article>
-        </section>
-        <div class="footnote">${esc(data.fuente)}</div>`;
-    }
+// ════════════════════════════════════════
+// CALCULATIONS
+// ════════════════════════════════════════
+const results = [
+  {id:'IND1', val: Math.round(DATA.ind1.analizadas / DATA.ind1.totalCtas * 1000) / 10, num: DATA.ind1.analizadas, den: DATA.ind1.totalCtas},
+  {id:'IND2', val: Math.round(DATA.ind2.correctos / DATA.ind2.totalEvaluados * 1000) / 10, num: DATA.ind2.correctos, den: DATA.ind2.totalEvaluados},
+  {id:'IND3', val: Math.round(DATA.ind3.controlados / DATA.ind3.totalActivos * 1000) / 10, num: DATA.ind3.controlados, den: DATA.ind3.totalActivos},
+  {id:'IND4', val: null, num: '—', den: '—'},
+  {id:'IND5', val: Math.round(DATA.ind5.emitidos / DATA.ind5.programados * 1000) / 10, num: DATA.ind5.emitidos, den: DATA.ind5.programados}
+];
 
-    document.addEventListener("click", (event) => {
-      const tab = event.target.closest("[data-role]");
-      if (tab) {
-        const next = tab.getAttribute("data-role");
-        if (!dashboardData[next] || next === state.role) return;
-        state.role = next;
-        render(state.role);
-        return;
-      }
+const metas = [100, 100, 100, 15, 100];
+const names = [DATA.ind1.name, DATA.ind2.name, DATA.ind3.name, DATA.ind4.name, DATA.ind5.name];
+const formulas = [DATA.ind1.formula, DATA.ind2.formula, DATA.ind3.formula, DATA.ind4.formula, DATA.ind5.formula];
+const metaLabels = [DATA.ind1.metaLabel, DATA.ind2.metaLabel, DATA.ind3.metaLabel, DATA.ind4.metaLabel, DATA.ind5.metaLabel];
 
-      const target = event.target.closest("[data-payload]");
-      if (!target) return;
-      const panel = view.querySelector(".selection");
-      if (!panel) return;
-      view.querySelectorAll(".selectable.is-selected").forEach((node) => node.classList.remove("is-selected"));
-      target.classList.add("is-selected");
-      const payload = JSON.parse(target.getAttribute("data-payload"));
-      panel.outerHTML = renderSelection(payload).trim().replace(/^<section class="card">|<\/section>$/g, "");
-    });
+function cumple(i) {
+  const v = results[i].val;
+  if (v === null) return 'na';
+  if (i === 3) return v >= 15 ? 'ok' : 'fail';
+  return v >= metas[i] ? 'ok' : 'fail';
+}
 
-    document.addEventListener("keydown", (event) => {
-      const target = event.target.closest("[data-payload]");
-      if (!target || (event.key !== "Enter" && event.key !== " ")) return;
-      event.preventDefault();
-      target.click();
-    });
+const cumpleCount = results.filter((r, i) => cumple(i) === 'ok').length;
+const totalEval = results.filter(r => r.val !== null).length;
+const cumplPct = totalEval > 0 ? Math.round(cumpleCount / totalEval * 100) : 0;
 
-    render(state.role);
-  </script>
+// ════════════════════════════════════════
+// RENDER
+// ════════════════════════════════════════
+
+// Update badge
+document.getElementById('updateBadge').textContent = '🔄 Últ. actualización: ' + new Date().toLocaleDateString('es-PE',{day:'2-digit',month:'2-digit',year:'numeric'});
+document.getElementById('genDate').textContent = new Date().toLocaleString('es-PE');
+
+// CUMPLIMIENTO GLOBAL CARD
+const cumplColor = cumplPct >= 80 ? '#10b981' : cumplPct >= 50 ? '#f59e0b' : '#ef4444';
+const r = 48, circ = 2 * Math.PI * r, off = circ - (cumplPct / 100) * circ;
+let cumplH = '<div class="cumpl-ring"><svg viewBox="0 0 120 120"><circle class="bg" cx="60" cy="60" r="'+r+'"/><circle class="val" cx="60" cy="60" r="'+r+'" stroke="'+cumplColor+'" stroke-dasharray="'+circ+'" stroke-dashoffset="'+off+'"/></svg><span class="cumpl-pct" style="color:'+cumplColor+'">'+cumplPct+'%</span></div>';
+cumplH += '<div class="cumpl-detail"><h3>Cumplimiento General: <span style="color:'+cumplColor+'">'+cumpleCount+' de '+totalEval+' indicadores evaluados cumplen la meta</span></h3>';
+cumplH += '<div style="font-size:0.72rem;color:var(--muted);margin-bottom:12px">IND 4 (Margen por Ruta) sin datos disponibles en el periodo</div>';
+cumplH += '<div class="cumpl-items">';
+results.forEach((r, i) => {
+  const st = cumple(i);
+  const cls = st === 'ok' ? 'ci-ok' : st === 'fail' ? 'ci-fail' : 'ci-na';
+  const lbl = st === 'ok' ? 'CUMPLE' : st === 'fail' ? 'NO CUMPLE' : 'SIN DATOS';
+  cumplH += '<div class="ci '+cls+'"><span class="dot"></span>IND '+(i+1)+': '+lbl+'</div>';
+});
+cumplH += '</div></div>';
+document.getElementById('cumplCard').innerHTML = cumplH;
+
+// KPIs
+const colors = ['blue','green','orange','red','purple'];
+let kpiH = '';
+results.forEach((r, i) => {
+  const v = r.val !== null ? r.val + '%' : 'N/A';
+  const st = cumple(i);
+  const stPill = st === 'ok' ? '<span class="g">✓ Cumple</span>' : st === 'fail' ? '<span class="r">✗ No cumple</span>' : '<span class="y">— Sin datos</span>';
+  kpiH += '<div class="kc '+colors[i]+'"><div class="kc-label">IND '+(i+1)+' — '+names[i]+'</div>';
+  kpiH += '<div class="kc-value">'+v+'</div>';
+  kpiH += '<div class="kc-sub">Meta: <b>'+metaLabels[i]+'</b> · '+stPill+'</div>';
+  if (r.val !== null) {
+    const pct = i === 3 ? Math.min(r.val / 30 * 100, 100) : r.val;
+    const bc = st === 'ok' ? '#10b981' : '#ef4444';
+    kpiH += '<div class="pbar"><div class="pbar-fill" style="width:'+Math.round(pct)+'%;background:'+bc+'"></div></div>';
+  }
+  kpiH += '</div>';
+});
+document.getElementById('kpiRow').innerHTML = kpiH;
+
+// CHART 1: Bar — Resultado vs Meta
+const ch1Vals = results.map(r => r.val !== null ? r.val : 0);
+new Chart(document.getElementById('ch1'), {
+  type: 'bar',
+  data: {
+    labels: ['IND 1','IND 2','IND 3','IND 4','IND 5'],
+    datasets: [
+      {label:'Resultado', data: ch1Vals, backgroundColor: ch1Vals.map((v,i) => cumple(i)==='ok' ? 'rgba(16,185,129,0.7)' : cumple(i)==='fail' ? 'rgba(239,68,68,0.7)' : 'rgba(100,116,139,0.3)'), borderRadius: 6, barThickness: 36},
+      {label:'Meta', data: metas, backgroundColor: 'rgba(255,255,255,0.06)', borderRadius: 6, barThickness: 36, borderWidth: 1, borderColor: 'rgba(255,255,255,0.12)'}
+    ]
+  },
+  options: {responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'top',labels:{padding:12,usePointStyle:true,pointStyle:'circle'}},tooltip:{...TP,callbacks:{label:c=>c.dataset.label+': '+c.parsed.y+'%'}}}, scales:{y:{beginAtZero:true,max:110,grid:GY,ticks:{callback:v=>v+'%'}},x:{grid:NG}}}
+});
+
+// CHART 2: Doughnut — Cumplimiento
+const failCount = results.filter((r, i) => cumple(i) === 'fail').length;
+const naCount = results.filter((r, i) => cumple(i) === 'na').length;
+new Chart(document.getElementById('ch2'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Cumple','No Cumple','Sin Datos'],
+    datasets: [{data:[cumpleCount, failCount, naCount], backgroundColor:['#10b981','#ef4444','#334155'], borderWidth:0}]
+  },
+  options: {responsive:true, maintainAspectRatio:false, cutout:'65%', plugins:{legend:{position:'bottom',labels:{padding:16,usePointStyle:true,pointStyle:'circle'}},tooltip:TP}}
+});
+
+// CHART 3: IND1 — Cuentas Críticas
+new Chart(document.getElementById('ch3'), {
+  type: 'doughnut',
+  data: {
+    labels: ['OK ('+DATA.ind1.ok+')','Falta ('+DATA.ind1.falta+')','Sin Analizar ('+(DATA.ind1.totalCtas-DATA.ind1.analizadas)+')'],
+    datasets: [{data:[DATA.ind1.ok, DATA.ind1.falta, DATA.ind1.totalCtas-DATA.ind1.analizadas], backgroundColor:['#10b981','#ef4444','#334155'], borderWidth:0}]
+  },
+  options: {responsive:true, maintainAspectRatio:false, cutout:'60%', plugins:{legend:{position:'bottom',labels:{padding:10,usePointStyle:true,pointStyle:'circle',font:{size:10}}},tooltip:TP}}
+});
+
+// CHART 4: IND2 — Categorías
+new Chart(document.getElementById('ch4'), {
+  type: 'bar',
+  data: {
+    labels: DATA.ind2.categorias.map(c => c.cat.length > 18 ? c.cat.substring(0,18)+'...' : c.cat),
+    datasets: [{data: DATA.ind2.categorias.map(c => c.cant), backgroundColor: CL.map(c => c+'BB'), borderRadius: 5}]
+  },
+  options: {responsive:true, maintainAspectRatio:false, indexAxis:'y', plugins:{legend:{display:false},tooltip:TP}, scales:{x:{beginAtZero:true,grid:GY,ticks:{stepSize:5}},y:{grid:NG,ticks:{font:{size:9}}}}}
+});
+
+// CHART 5: IND3 — Control
+new Chart(document.getElementById('ch5'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Controlados (97)','No Controlados (0)'],
+    datasets: [{data:[97, 0], backgroundColor:['#10b981','#ef4444'], borderWidth:0}]
+  },
+  options: {responsive:true, maintainAspectRatio:false, cutout:'60%', plugins:{legend:{position:'bottom',labels:{padding:10,usePointStyle:true,pointStyle:'circle',font:{size:10}}},tooltip:TP}}
+});
+
+// TABLE IND 1
+let tb1H = '';
+DATA.ind1.cuentasCriticas.forEach(c => {
+  const det = DATA.ind1.detalle.find(d => String(d.cuenta).startsWith(String(c.num)));
+  const st = det ? (det.estado === 'OK' ? '<span class="pill pill-green">OK</span>' : '<span class="pill pill-red">FALTA</span>') : '<span class="pill pill-gray">SIN ANALIZAR</span>';
+  const glosa = det ? det.glosa : '—';
+  const desc2 = det ? det.desc : '—';
+  tb1H += '<tr><td class="mono" style="color:var(--accent)">'+c.num+'</td><td>'+c.desc+'</td><td>'+glosa+'</td><td>'+st+'</td></tr>';
+});
+DATA.ind1.detalle.forEach(d => {
+  const exists = DATA.ind1.cuentasCriticas.find(c => String(d.cuenta).startsWith(String(c.num)));
+  if (!exists) {
+    const st = d.estado === 'OK' ? '<span class="pill pill-green">OK</span>' : '<span class="pill pill-red">FALTA</span>';
+    tb1H += '<tr><td class="mono" style="color:var(--accent)">'+d.cuenta+'</td><td>'+d.desc+'</td><td>'+d.glosa+'</td><td>'+st+'</td></tr>';
+  }
+});
+document.getElementById('tbInd1').innerHTML = tb1H;
+
+// TABLE IND 2
+let tb2H = '';
+DATA.ind2.categorias.forEach((c, i) => {
+  const pct = Math.round(c.cant / 97 * 1000) / 10;
+  tb2H += '<tr><td><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:'+CL[i]+';margin-right:8px"></span>'+c.cat+'</td><td class="mono">'+c.cant+'</td><td class="mono">'+pct+'%</td></tr>';
+});
+tb2H += '<tr style="font-weight:600"><td>Total</td><td class="mono">97</td><td class="mono">100%</td></tr>';
+document.getElementById('tbInd2').innerHTML = tb2H;
+
+// TABLE IND 5
+let tb5H = '';
+DATA.ind5.reportes.forEach(r => {
+  tb5H += '<tr><td class="mono" style="color:var(--accent)">'+r.num+'</td><td>'+r.desc+'</td><td class="mono">'+r.fecha+'</td><td><span class="pill pill-green">EMITIDO</span></td></tr>';
+});
+document.getElementById('tbInd5').innerHTML = tb5H;
+
+// TABLE MATRIZ
+let tbMH = '';
+results.forEach((r, i) => {
+  const v = r.val !== null ? r.val + '%' : 'N/A';
+  const st = cumple(i);
+  const pillCls = st === 'ok' ? 'pill-green' : st === 'fail' ? 'pill-red' : 'pill-gray';
+  const pillLbl = st === 'ok' ? 'CUMPLE' : st === 'fail' ? 'NO CUMPLE' : 'SIN DATOS';
+  tbMH += '<tr><td class="mono" style="color:'+CL[i]+'">IND '+(i+1)+'</td><td>'+names[i]+'</td><td style="font-size:0.62rem;color:var(--muted);max-width:200px;white-space:normal">'+formulas[i]+'</td><td class="mono">'+r.num+'</td><td class="mono">'+r.den+'</td><td class="mono" style="font-weight:700;color:'+(st==='ok'?'#34d399':st==='fail'?'#f87171':'var(--muted)')+'">'+v+'</td><td>'+metaLabels[i]+'</td><td><span class="pill '+pillCls+'">'+pillLbl+'</span></td></tr>';
+});
+document.getElementById('tbMatriz').innerHTML = tbMH;
+
+// FUNCIONES
+const funciones = [
+  {icon:'📊',title:'Análisis de Cuentas Críticas',desc:'Revisión y conciliación de cuentas contables críticas. Identificación de partidas inusuales, verificación de saldos y documentación de hallazgos.',color:'var(--accent)',tag:'IND 1',tagBg:'rgba(59,130,246,0.15)'},
+  {icon:'📋',title:'Depreciación Correcta',desc:'Evaluación de tasas y métodos de depreciación según NIC 16. Verificación de vida útil y valor residual de cada activo fijo de la empresa.',color:'var(--success)',tag:'IND 2',tagBg:'rgba(16,185,129,0.15)'},
+  {icon:'🏗️',title:'Control de Activos Fijos',desc:'Inventario físico y control documental. Verificación de existencia, estado, ubicación y asignación de custodio responsable de cada activo.',color:'var(--warn)',tag:'IND 3',tagBg:'rgba(245,158,11,0.15)'},
+  {icon:'🚛',title:'Margen por Ruta',desc:'Análisis de rentabilidad por ruta de transporte. Cálculo de ingresos vs costos operativos para determinar margen de contribución mínimo del 15%.',color:'var(--danger)',tag:'IND 4',tagBg:'rgba(239,68,68,0.15)'},
+  {icon:'📑',title:'Reportes Analíticos',desc:'Elaboración y entrega oportuna de reportes contables: compras, ventas, cierre mensual, análisis de variaciones y reportes de costos.',color:'var(--accent2)',tag:'IND 5',tagBg:'rgba(99,102,241,0.15)'}
+];
+let funcH = '';
+funciones.forEach(f => {
+  funcH += '<div class="func-card"><div class="func-icon">'+f.icon+'</div><h4 style="color:'+f.color+'">'+f.title+'</h4><p>'+f.desc+'</p><span class="func-tag" style="background:'+f.tagBg+';color:'+f.color+'">'+f.tag+'</span></div>';
+});
+document.getElementById('funcGrid').innerHTML = funcH;
+</script>
 </body>
 </html>
