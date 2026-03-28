@@ -8,452 +8,143 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0b1121;--bg2:#0f172a;--bg3:#1e293b;--card:#131c2e;--card-border:#1e293b;--accent:#3b82f6;--accent2:#6366f1;--success:#10b981;--warn:#f59e0b;--danger:#ef4444;--cyan:#06b6d4;--text:#e2e8f0;--muted:#64748b;--muted2:#94a3b8;--border:rgba(255,255,255,0.06)}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
-.top-bar{background:var(--bg2);border-bottom:1px solid var(--border);padding:16px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+:root{--bg:#0b1121;--bg2:#0f172a;--bg3:#1e293b;--card:#131c2e;--cb:#1e293b;--a:#3b82f6;--a2:#6366f1;--ok:#10b981;--w:#f59e0b;--ng:#ef4444;--cy:#06b6d4;--t:#e2e8f0;--m:#64748b;--m2:#94a3b8;--bd:rgba(255,255,255,0.06)}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--t);min-height:100vh}
+.top{background:var(--bg2);border-bottom:1px solid var(--bd);padding:16px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
 .brand{display:flex;align-items:center;gap:12px}
-.brand .logo{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--success));display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff}
-.brand h1{font-size:1rem;font-weight:700;line-height:1.2}
-.brand h1 span{color:var(--success);font-weight:600}
-.brand small{display:block;font-size:0.65rem;color:var(--muted);font-weight:400}
+.brand .logo{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--a),var(--ok));display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff}
+.brand h1{font-size:0.95rem;font-weight:700;line-height:1.2}.brand h1 span{color:var(--ok)}.brand small{display:block;font-size:0.62rem;color:var(--m);font-weight:400;margin-top:2px}
 .badges{display:flex;gap:8px;flex-wrap:wrap}
-.badge{font-family:'Space Mono',monospace;font-size:0.68rem;padding:6px 14px;border-radius:8px;white-space:nowrap}
-.badge-blue{background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.3);color:var(--accent)}
-.badge-green{background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.3);color:var(--success)}
-.badge-red{background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.3);color:var(--danger)}
-.main{padding:24px 32px;max-width:1400px;margin:0 auto}
-.section-title{font-size:0.62rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted);font-weight:700;margin-bottom:14px;padding-left:2px}
-/* KPI */
-.kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:24px}
-.kc{background:var(--card);border:1px solid var(--card-border);border-radius:12px;padding:18px 20px;position:relative;overflow:hidden}
+.bdg{font-family:'Space Mono',monospace;font-size:0.66rem;padding:6px 14px;border-radius:8px;white-space:nowrap}
+.bdg-b{background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.25);color:var(--a)}
+.bdg-g{background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.25);color:var(--ok)}
+.main{padding:20px 28px;max-width:1440px;margin:0 auto}
+.sec{font-size:0.6rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--m);font-weight:700;margin-bottom:12px;padding-left:2px}
+.hero{background:var(--card);border:1px solid var(--cb);border-radius:14px;padding:24px 28px;margin-bottom:20px;display:flex;align-items:center;gap:28px}
+.ring{position:relative;width:110px;height:110px;flex-shrink:0}
+.ring svg{width:110px;height:110px;transform:rotate(-90deg)}.ring .bg{fill:none;stroke:var(--bg3);stroke-width:10}.ring .v{fill:none;stroke-width:10;stroke-linecap:round}
+.ring-pct{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Space Mono',monospace;font-size:1.5rem;font-weight:700}
+.hero-body{flex:1}.hero-body h2{font-size:1.05rem;font-weight:700;margin-bottom:8px}
+.hero-body p{font-size:0.72rem;color:var(--m2);margin-bottom:12px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{padding:5px 12px;border-radius:8px;font-size:0.68rem;font-weight:600;display:flex;align-items:center;gap:5px}
+.chip .d{width:7px;height:7px;border-radius:50%}
+.c-ok{background:rgba(16,185,129,0.1);color:#34d399}.c-ok .d{background:#10b981}
+.c-ng{background:rgba(239,68,68,0.1);color:#f87171}.c-ng .d{background:#ef4444}
+.kr{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:20px}
+.kc{background:var(--card);border:1px solid var(--cb);border-radius:12px;padding:16px 18px;position:relative;overflow:hidden}
 .kc::after{content:'';position:absolute;top:0;left:0;right:0;height:2px}
-.kc.blue::after{background:var(--accent)}.kc.green::after{background:var(--success)}.kc.red::after{background:var(--danger)}.kc.orange::after{background:var(--warn)}.kc.purple::after{background:var(--accent2)}.kc.cyan::after{background:var(--cyan)}
-.kc-label{font-size:0.68rem;color:var(--muted);font-weight:500;margin-bottom:8px}
-.kc-value{font-family:'Space Mono',monospace;font-size:1.7rem;font-weight:700;line-height:1}
-.kc.blue .kc-value{color:var(--accent)}.kc.green .kc-value{color:var(--success)}.kc.red .kc-value{color:var(--danger)}.kc.orange .kc-value{color:var(--warn)}.kc.purple .kc-value{color:var(--accent2)}.kc.cyan .kc-value{color:var(--cyan)}
-.kc-sub{font-size:0.65rem;color:var(--muted);margin-top:8px;line-height:1.5}
-.kc-sub b{font-weight:600}
-.kc-sub .g{color:var(--success)}.kc-sub .r{color:var(--danger)}.kc-sub .y{color:var(--warn)}.kc-sub .b{color:var(--accent)}
-/* Progress bar */
-.pbar{width:100%;height:6px;border-radius:3px;background:var(--bg);overflow:hidden;margin-top:10px}
-.pbar-fill{height:100%;border-radius:3px;transition:width 0.6s ease}
-/* CUMPLIMIENTO CARD */
-.cumpl-card{background:var(--card);border:1px solid var(--card-border);border-radius:12px;padding:24px;margin-bottom:24px;display:flex;align-items:center;gap:32px}
-.cumpl-ring{position:relative;width:120px;height:120px;flex-shrink:0}
-.cumpl-ring svg{width:120px;height:120px;transform:rotate(-90deg)}
-.cumpl-ring .bg{fill:none;stroke:var(--bg3);stroke-width:10}
-.cumpl-ring .val{fill:none;stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset 1s ease}
-.cumpl-pct{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Space Mono',monospace;font-size:1.6rem;font-weight:700}
-.cumpl-detail{flex:1}
-.cumpl-detail h3{font-size:1rem;font-weight:600;margin-bottom:12px}
-.cumpl-items{display:flex;flex-wrap:wrap;gap:8px}
-.ci{padding:6px 14px;border-radius:8px;font-size:0.72rem;font-weight:600;display:flex;align-items:center;gap:6px}
-.ci .dot{width:8px;height:8px;border-radius:50%}
-.ci-ok{background:rgba(16,185,129,0.1);color:#34d399}.ci-ok .dot{background:#10b981}
-.ci-fail{background:rgba(239,68,68,0.1);color:#f87171}.ci-fail .dot{background:#ef4444}
-.ci-na{background:rgba(100,116,139,0.15);color:var(--muted2)}.ci-na .dot{background:var(--muted)}
-/* Charts */
-.cg{display:grid;gap:14px;margin-bottom:24px}
-.cg.c2{grid-template-columns:1fr 1fr}
-.cg.c3{grid-template-columns:1fr 1fr 1fr}
-.cg.c21{grid-template-columns:2fr 1fr}
-.cp{background:var(--card);border:1px solid var(--card-border);border-radius:12px;padding:18px 20px;overflow:hidden}
-.cp h3{font-size:0.78rem;font-weight:600;margin-bottom:14px;color:var(--text)}
-.cwrap{position:relative;height:280px}
-.cwrap.short{height:220px}
-/* Tables */
-.tp{background:var(--card);border:1px solid var(--card-border);border-radius:12px;padding:18px 20px;margin-bottom:24px;overflow:hidden}
-.tp h3{font-size:0.78rem;font-weight:600;margin-bottom:12px}
-.tw{overflow-x:auto;max-height:420px;overflow-y:auto}
-table{width:100%;border-collapse:collapse;font-size:0.72rem}
-thead th{background:var(--bg3);color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.04em;font-size:0.62rem;padding:9px 12px;text-align:left;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:2}
-tbody td{padding:8px 12px;border-bottom:1px solid var(--border);color:var(--muted2);white-space:nowrap}
-tbody tr:hover td{background:rgba(59,130,246,0.04);color:var(--text)}
-.pill{display:inline-block;padding:2px 10px;border-radius:20px;font-size:0.62rem;font-weight:600}
-.pill-green{background:rgba(16,185,129,0.15);color:#34d399}
-.pill-red{background:rgba(239,68,68,0.15);color:#f87171}
-.pill-yellow{background:rgba(245,158,11,0.15);color:#fbbf24}
-.pill-blue{background:rgba(59,130,246,0.15);color:#60a5fa}
-.pill-purple{background:rgba(99,102,241,0.15);color:#a78bfa}
-.pill-gray{background:rgba(100,116,139,0.15);color:var(--muted2)}
-.mono{font-family:'Space Mono',monospace}
-/* Funciones grid */
-.func-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-bottom:24px}
-.func-card{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:16px;transition:transform 0.2s}
-.func-card:hover{transform:translateY(-2px)}
-.func-icon{font-size:1.2rem;margin-bottom:8px}
-.func-card h4{font-size:0.78rem;font-weight:600;margin-bottom:6px}
-.func-card p{font-size:0.68rem;color:var(--muted2);line-height:1.6}
-.func-tag{display:inline-block;font-size:0.58rem;padding:2px 8px;border-radius:4px;font-weight:600;margin-top:8px}
-.footer{text-align:center;padding:20px 32px;color:var(--muted);font-size:0.68rem;border-top:1px solid var(--border)}
-@media(max-width:900px){.kpi-row{grid-template-columns:repeat(2,1fr)}.cg.c2,.cg.c21,.cg.c3{grid-template-columns:1fr}.cumpl-card{flex-direction:column;text-align:center}}
+.kc.bl::after{background:var(--a)}.kc.gn::after{background:var(--ok)}.kc.og::after{background:var(--w)}.kc.rd::after{background:var(--ng)}.kc.pu::after{background:var(--a2)}
+.kc-l{font-size:0.64rem;color:var(--m);font-weight:500;margin-bottom:6px}
+.kc-v{font-family:'Space Mono',monospace;font-size:1.6rem;font-weight:700;line-height:1}
+.kc.bl .kc-v{color:var(--a)}.kc.gn .kc-v{color:var(--ok)}.kc.og .kc-v{color:var(--w)}.kc.rd .kc-v{color:var(--ng)}.kc.pu .kc-v{color:var(--a2)}
+.kc-s{font-size:0.62rem;color:var(--m);margin-top:6px;line-height:1.4}.kc-s b{font-weight:600}.kc-s .g{color:var(--ok)}.kc-s .r{color:var(--ng)}
+.pb{width:100%;height:5px;border-radius:3px;background:var(--bg);overflow:hidden;margin-top:8px}.pb-f{height:100%;border-radius:3px}
+.cg{display:grid;gap:12px;margin-bottom:20px}.cg.c2{grid-template-columns:1fr 1fr}.cg.c3{grid-template-columns:1fr 1fr 1fr}.cg.c21{grid-template-columns:2fr 1fr}
+.cp{background:var(--card);border:1px solid var(--cb);border-radius:12px;padding:16px 18px;overflow:hidden}
+.cp h3{font-size:0.75rem;font-weight:600;margin-bottom:12px}
+.cw{position:relative;height:260px}.cw.sh{height:210px}.cw.tl{height:340px}
+.tp{background:var(--card);border:1px solid var(--cb);border-radius:12px;padding:16px 18px;margin-bottom:20px}
+.tp h3{font-size:0.75rem;font-weight:600;margin-bottom:10px}
+.tw{overflow-x:auto;max-height:380px;overflow-y:auto}
+table{width:100%;border-collapse:collapse;font-size:0.7rem}
+thead th{background:var(--bg3);color:var(--m);font-weight:600;text-transform:uppercase;letter-spacing:0.04em;font-size:0.6rem;padding:8px 10px;text-align:left;border-bottom:1px solid var(--bd);position:sticky;top:0;z-index:2}
+tbody td{padding:7px 10px;border-bottom:1px solid var(--bd);color:var(--m2);white-space:nowrap}
+tbody tr:hover td{background:rgba(59,130,246,0.04);color:var(--t)}
+.pill{display:inline-block;padding:2px 9px;border-radius:20px;font-size:0.6rem;font-weight:600}
+.p-gn{background:rgba(16,185,129,0.15);color:#34d399}.p-rd{background:rgba(239,68,68,0.15);color:#f87171}.p-gy{background:rgba(100,116,139,0.15);color:var(--m2)}
+.mn{font-family:'Space Mono',monospace}
+.fg{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin-bottom:20px}
+.fc{background:var(--bg3);border:1px solid var(--bd);border-radius:10px;padding:14px;transition:transform 0.2s}.fc:hover{transform:translateY(-2px)}
+.fc h4{font-size:0.74rem;font-weight:600;margin-bottom:4px}.fc p{font-size:0.66rem;color:var(--m2);line-height:1.5}
+.ft{text-align:center;padding:16px 28px;color:var(--m);font-size:0.65rem;border-top:1px solid var(--bd)}
+@media(max-width:900px){.kr{grid-template-columns:repeat(2,1fr)}.cg.c2,.cg.c21,.cg.c3{grid-template-columns:1fr}.hero{flex-direction:column;text-align:center}}
 </style>
 </head>
 <body>
-
-<div class="top-bar">
-  <div class="brand">
-    <div class="logo">TR</div>
-    <h1>Transporte Nasca <span>Rojim S.R.L.</span><small>Dashboard Indicadores — Analista Contable</small></h1>
-  </div>
-  <div class="badges">
-    <div class="badge badge-blue">Periodo: Marzo 2026</div>
-    <div class="badge badge-green" id="updateBadge"></div>
-  </div>
+<div class="top">
+  <div class="brand"><div class="logo">TR</div><h1>Transporte Nasca <span>Rojim S.R.L.</span><small>Dashboard Indicadores — Analista Contable — Marzo 2026</small></h1></div>
+  <div class="badges"><div class="bdg bdg-b">Periodo: Marzo 2026</div><div class="bdg bdg-g" id="upd"></div></div>
 </div>
-
 <div class="main">
-
-<!-- CUMPLIMIENTO GLOBAL -->
-<div class="section-title">Cumplimiento global de indicadores</div>
-<div class="cumpl-card" id="cumplCard"></div>
-
-<!-- KPIs -->
-<div class="section-title">Resumen de indicadores</div>
-<div class="kpi-row" id="kpiRow"></div>
-
-<!-- CHARTS ROW 1 -->
-<div class="section-title">Análisis visual</div>
+<div class="sec">Cumplimiento global</div>
+<div class="hero" id="hero"></div>
+<div class="sec">Resumen de indicadores</div>
+<div class="kr" id="kpi"></div>
+<div class="sec">Análisis visual</div>
 <div class="cg c2">
-  <div class="cp"><h3>Resultado Actual vs Meta (%)</h3><div class="cwrap"><canvas id="ch1"></canvas></div></div>
-  <div class="cp"><h3>Cumplimiento por Indicador</h3><div class="cwrap"><canvas id="ch2"></canvas></div></div>
+  <div class="cp"><h3>Resultado vs Meta (%)</h3><div class="cw"><canvas id="c1"></canvas></div></div>
+  <div class="cp"><h3>Cumplimiento por Indicador</h3><div class="cw"><canvas id="c2"></canvas></div></div>
 </div>
-
-<!-- CHARTS ROW 2 -->
 <div class="cg c3">
-  <div class="cp"><h3>IND 1 — Cuentas Críticas</h3><div class="cwrap short"><canvas id="ch3"></canvas></div></div>
-  <div class="cp"><h3>IND 2 — Activos por Categoría</h3><div class="cwrap short"><canvas id="ch4"></canvas></div></div>
-  <div class="cp"><h3>IND 3 — Control Activos Fijos</h3><div class="cwrap short"><canvas id="ch5"></canvas></div></div>
+  <div class="cp"><h3>IND 1 — Cuentas Críticas</h3><div class="cw sh"><canvas id="c3"></canvas></div></div>
+  <div class="cp"><h3>IND 2 — Activos por Categoría</h3><div class="cw sh"><canvas id="c4"></canvas></div></div>
+  <div class="cp"><h3>IND 4 — Margen por Ruta</h3><div class="cw sh"><canvas id="c5"></canvas></div></div>
 </div>
-
-<!-- DETAIL TABLE IND 1 -->
-<div class="tp">
-  <h3>IND 1 — Detalle Análisis de Cuentas Críticas <span style="color:var(--warn);font-size:0.68rem;margin-left:8px">(14 cuentas / 8 analizadas)</span></h3>
-  <div class="tw">
-    <table>
-      <thead><tr><th>Cuenta</th><th>Descripción</th><th>Glosa</th><th>Estado</th></tr></thead>
-      <tbody id="tbInd1"></tbody>
-    </table>
-  </div>
+<div class="cg c21">
+  <div class="cp"><h3>IND 4 — Margen por Conductor (Top 10)</h3><div class="cw tl"><canvas id="c6"></canvas></div></div>
+  <div class="cp"><h3>Distribución Ingreso Global</h3><div class="cw tl"><canvas id="c7"></canvas></div></div>
 </div>
-
-<!-- IND 2 & IND 3 SUMMARY TABLE -->
+<div class="tp"><h3>IND 1 — Detalle Cuentas Críticas <span style="color:var(--w);font-size:0.66rem;margin-left:6px">(14 cuentas / 8 analizadas)</span></h3><div class="tw"><table><thead><tr><th>Cuenta</th><th>Descripción</th><th>Glosa</th><th>Estado</th></tr></thead><tbody id="t1"></tbody></table></div></div>
 <div class="cg c2">
-  <div class="tp" style="margin-bottom:0">
-    <h3>IND 2 — Activos Evaluados por Categoría <span style="color:var(--success);font-size:0.68rem;margin-left:8px">(97 activos)</span></h3>
-    <div class="tw"><table><thead><tr><th>Categoría</th><th>Cantidad</th><th>% del Total</th></tr></thead><tbody id="tbInd2"></tbody></table></div>
-  </div>
-  <div class="tp" style="margin-bottom:0">
-    <h3>IND 5 — Reportes Analíticos Emitidos <span style="color:var(--success);font-size:0.68rem;margin-left:8px">(2 reportes)</span></h3>
-    <div class="tw"><table><thead><tr><th>#</th><th>Descripción</th><th>Fecha Emisión</th><th>Estado</th></tr></thead><tbody id="tbInd5"></tbody></table></div>
-  </div>
+  <div class="tp" style="margin:0"><h3>IND 2 — Activos Evaluados <span style="color:var(--ok);font-size:0.66rem;margin-left:6px">(97 activos)</span></h3><div class="tw"><table><thead><tr><th>Categoría</th><th>Cant.</th><th>%</th></tr></thead><tbody id="t2"></tbody></table></div></div>
+  <div class="tp" style="margin:0"><h3>IND 5 — Reportes Emitidos <span style="color:var(--ok);font-size:0.66rem;margin-left:6px">(2/2)</span></h3><div class="tw"><table><thead><tr><th>#</th><th>Descripción</th><th>Fecha</th><th>Estado</th></tr></thead><tbody id="t5"></tbody></table></div></div>
 </div>
-
-<!-- DETAIL TABLE ALL INDICATORS -->
-<div class="tp" style="margin-top:24px">
-  <h3>Matriz de Indicadores — Analista Contable</h3>
-  <div class="tw">
-    <table>
-      <thead><tr><th>Item</th><th>Indicador</th><th>Fórmula</th><th>Numerador</th><th>Denominador</th><th>Resultado</th><th>Meta</th><th>Estado</th></tr></thead>
-      <tbody id="tbMatriz"></tbody>
-    </table>
-  </div>
+<div class="tp" style="margin-top:20px"><h3>IND 4 — Detalle Margen por Ruta <span style="color:var(--ok);font-size:0.66rem;margin-left:6px">(78 viajes · Margen global 74.5%)</span></h3><div class="tw"><table><thead><tr><th>Ruta</th><th>Viajes</th><th>Facturación</th><th>Costo</th><th>Margen S/.</th><th>Margen %</th><th>Estado</th></tr></thead><tbody id="t4"></tbody></table></div></div>
+<div class="tp"><h3>Matriz Completa de Indicadores</h3><div class="tw"><table><thead><tr><th>Item</th><th>Indicador</th><th>Fórmula</th><th>Numerador</th><th>Denominador</th><th>Resultado</th><th>Meta</th><th>Estado</th></tr></thead><tbody id="tm"></tbody></table></div></div>
+<div class="sec">Funciones del analista contable</div>
+<div class="fg" id="funcs"></div>
 </div>
-
-<!-- FUNCIONES -->
-<div class="section-title" style="margin-top:24px">Funciones del analista contable</div>
-<div class="func-grid" id="funcGrid"></div>
-
-</div>
-
-<div class="footer">Transporte Nasca Rojim S.R.L. | Dashboard Indicadores Analista Contable | Generado: <span id="genDate"></span></div>
-
+<div class="ft">Transporte Nasca Rojim S.R.L. | Dashboard Indicadores Analista Contable | <span id="gen"></span></div>
 <script>
-Chart.defaults.color='#64748b';
-Chart.defaults.borderColor='rgba(255,255,255,0.04)';
-Chart.defaults.font.family="'DM Sans',sans-serif";
+Chart.defaults.color='#64748b';Chart.defaults.borderColor='rgba(255,255,255,0.04)';Chart.defaults.font.family="'DM Sans',sans-serif";
 const TP={backgroundColor:'#1e293b',titleColor:'#fff',bodyColor:'#94a3b8',borderColor:'rgba(255,255,255,0.08)',borderWidth:1,cornerRadius:8,padding:10};
-const GY={color:'rgba(255,255,255,0.04)'};
-const NG={display:false};
+const GY={color:'rgba(255,255,255,0.04)'};const NG={display:false};
 const CL=['#3b82f6','#10b981','#f59e0b','#ef4444','#6366f1','#06b6d4'];
-
-// ════════════════════════════════════════
-// DATA FROM EXCEL
-// ════════════════════════════════════════
-const DATA = {
-  ind1: {
-    name: 'Análisis de Cuentas Críticas',
-    formula: '(#Ctas Críticas Analizadas / #Ctas Críticas Totales) × 100',
-    totalCtas: 14,
-    analizadas: 8,
-    ok: 3,
-    falta: 5,
-    meta: 100,
-    metaLabel: '100%',
-    cuentasCriticas: [
-      {num:10,desc:'Efectivo y equivalentes de efectivo'},
-      {num:12,desc:'Cuentas por cobrar comerciales - Terceros'},
-      {num:14,desc:'Cuentas por cobrar al personal, socios, directores'},
-      {num:16,desc:'Cuentas por cobrar diversas - Terceros'},
-      {num:18,desc:'Servicios y otros contratados por anticipado'},
-      {num:33,desc:'Inmuebles, maquinaria y equipo'},
-      {num:34,desc:'Intangibles'},
-      {num:37,desc:'Activo diferido'},
-      {num:39,desc:'Depreciación, amortización y agotamiento'},
-      {num:40,desc:'Tributos y aportes al sistema de pensiones'},
-      {num:41,desc:'Remuneraciones y participaciones por pagar'},
-      {num:42,desc:'Cuentas por pagar comerciales - Terceros'},
-      {num:44,desc:'Cuentas por pagar a socios, directores'},
-      {num:46,desc:'Cuentas por pagar diversas - Terceros'}
-    ],
-    detalle: [
-      {cuenta:101101,desc:'CAJA',glosa:'CAJA CHICA',estado:'OK'},
-      {cuenta:122102,desc:'ANTICIPOS DE CLIENTES TERCEROS M.E.',glosa:'DEVOL. PARTE SINIESTRO',estado:'FALTA'},
-      {cuenta:141101,desc:'PRESTAMOS DE PERSONAL EMPLEADOS M.N',glosa:'PRÉSTAMO AL PERSONAL',estado:'OK'},
-      {cuenta:141301,desc:'ENTREGAS A RENDIR CUENTA PERSONAL M.N.',glosa:'VIÁTICOS AL PERSONAL',estado:'OK'},
-      {cuenta:182105,desc:'SEGURO VEHICULAR',glosa:'DIVEIMPORT',estado:'FALTA'},
-      {cuenta:373102,desc:'INTERÉS DIFERIDOS',glosa:'DIVEIMPORT',estado:'FALTA'},
-      {cuenta:421202,desc:'FACTURAS EMITIDAS POR PAGAR M.E. TERCEROS',glosa:'VOLTRAILER',estado:'FALTA'},
-      {cuenta:461102,desc:'RECLAMACIONES DE TERCEROS M.E',glosa:'DIVEIMPORT',estado:'FALTA'}
-    ]
-  },
-  ind2: {
-    name: 'Depreciación Correcta',
-    formula: '(#Activos Evaluados / #Activos con Deprec. Correcta) × 100',
-    totalEvaluados: 97,
-    correctos: 97,
-    meta: 100,
-    metaLabel: '100%',
-    categorias: [
-      {cat:'Unidades de Transporte',cant:37},
-      {cat:'Llantas Vehículos',cant:23},
-      {cat:'Equipos de Cómputo',cant:15},
-      {cat:'Equipos de Telecomunicaciones',cant:9},
-      {cat:'Repuestos Vehículos',cant:8},
-      {cat:'Muebles',cant:5}
-    ]
-  },
-  ind3: {
-    name: 'Control de Activos Fijos',
-    formula: '(#Activos Controlados / #Activos Totales) × 100',
-    totalActivos: 97,
-    controlados: 97,
-    meta: 100,
-    metaLabel: '100%',
-    categorias: [
-      {cat:'Unidades de Transporte',cant:37},
-      {cat:'Llantas Vehículos',cant:23},
-      {cat:'Equipos de Cómputo',cant:15},
-      {cat:'Equipos de Telecomunicaciones',cant:9},
-      {cat:'Repuestos Vehículos',cant:8},
-      {cat:'Muebles',cant:5}
-    ]
-  },
-  ind4: {
-    name: 'Margen por Ruta',
-    formula: '(Ingreso Ruta - Costo Ruta) / Ingreso Ruta × 100',
-    resultado: null,
-    meta: 15,
-    metaLabel: '≥ 15%'
-  },
-  ind5: {
-    name: 'Reportes Analíticos',
-    formula: '(#Reportes Emitidos / #Reportes Programados) × 100',
-    programados: 2,
-    emitidos: 2,
-    meta: 100,
-    metaLabel: '100%',
-    reportes: [
-      {num:1,desc:'Reporte de Compras Diciembre 2025',fecha:'16/03/2026'},
-      {num:2,desc:'Reporte de Ventas Diciembre 2025',fecha:'16/03/2026'}
-    ]
-  }
-};
-
-// ════════════════════════════════════════
-// CALCULATIONS
-// ════════════════════════════════════════
-const results = [
-  {id:'IND1', val: Math.round(DATA.ind1.analizadas / DATA.ind1.totalCtas * 1000) / 10, num: DATA.ind1.analizadas, den: DATA.ind1.totalCtas},
-  {id:'IND2', val: Math.round(DATA.ind2.correctos / DATA.ind2.totalEvaluados * 1000) / 10, num: DATA.ind2.correctos, den: DATA.ind2.totalEvaluados},
-  {id:'IND3', val: Math.round(DATA.ind3.controlados / DATA.ind3.totalActivos * 1000) / 10, num: DATA.ind3.controlados, den: DATA.ind3.totalActivos},
-  {id:'IND4', val: null, num: '—', den: '—'},
-  {id:'IND5', val: Math.round(DATA.ind5.emitidos / DATA.ind5.programados * 1000) / 10, num: DATA.ind5.emitidos, den: DATA.ind5.programados}
+const IND=[
+  {id:'IND 1',name:'Análisis de Cuentas Críticas',formula:'(#Ctas Analizadas / #Ctas Críticas Totales) x 100',num:8,den:14,meta:100,metaL:'100%',cls:'bl'},
+  {id:'IND 2',name:'Depreciación Correcta',formula:'(#Activos Deprec. Correcta / #Activos Evaluados) x 100',num:97,den:97,meta:100,metaL:'100%',cls:'gn'},
+  {id:'IND 3',name:'Control de Activos Fijos',formula:'(#Activos Controlados / #Activos Totales) x 100',num:97,den:97,meta:100,metaL:'100%',cls:'og'},
+  {id:'IND 4',name:'Margen por Ruta',formula:'(Ingreso - Costo) / Ingreso x 100',num:407321.21,den:546708.86,meta:15,metaL:'≥ 15%',cls:'rd'},
+  {id:'IND 5',name:'Reportes Analíticos',formula:'(#Reportes Emitidos / #Reportes Programados) x 100',num:2,den:2,meta:100,metaL:'100%',cls:'pu'}
 ];
-
-const metas = [100, 100, 100, 15, 100];
-const names = [DATA.ind1.name, DATA.ind2.name, DATA.ind3.name, DATA.ind4.name, DATA.ind5.name];
-const formulas = [DATA.ind1.formula, DATA.ind2.formula, DATA.ind3.formula, DATA.ind4.formula, DATA.ind5.formula];
-const metaLabels = [DATA.ind1.metaLabel, DATA.ind2.metaLabel, DATA.ind3.metaLabel, DATA.ind4.metaLabel, DATA.ind5.metaLabel];
-
-function cumple(i) {
-  const v = results[i].val;
-  if (v === null) return 'na';
-  if (i === 3) return v >= 15 ? 'ok' : 'fail';
-  return v >= metas[i] ? 'ok' : 'fail';
-}
-
-const cumpleCount = results.filter((r, i) => cumple(i) === 'ok').length;
-const totalEval = results.filter(r => r.val !== null).length;
-const cumplPct = totalEval > 0 ? Math.round(cumpleCount / totalEval * 100) : 0;
-
-// ════════════════════════════════════════
-// RENDER
-// ════════════════════════════════════════
-
-// Update badge
-document.getElementById('updateBadge').textContent = '🔄 Últ. actualización: ' + new Date().toLocaleDateString('es-PE',{day:'2-digit',month:'2-digit',year:'numeric'});
-document.getElementById('genDate').textContent = new Date().toLocaleString('es-PE');
-
-// CUMPLIMIENTO GLOBAL CARD
-const cumplColor = cumplPct >= 80 ? '#10b981' : cumplPct >= 50 ? '#f59e0b' : '#ef4444';
-const r = 48, circ = 2 * Math.PI * r, off = circ - (cumplPct / 100) * circ;
-let cumplH = '<div class="cumpl-ring"><svg viewBox="0 0 120 120"><circle class="bg" cx="60" cy="60" r="'+r+'"/><circle class="val" cx="60" cy="60" r="'+r+'" stroke="'+cumplColor+'" stroke-dasharray="'+circ+'" stroke-dashoffset="'+off+'"/></svg><span class="cumpl-pct" style="color:'+cumplColor+'">'+cumplPct+'%</span></div>';
-cumplH += '<div class="cumpl-detail"><h3>Cumplimiento General: <span style="color:'+cumplColor+'">'+cumpleCount+' de '+totalEval+' indicadores evaluados cumplen la meta</span></h3>';
-cumplH += '<div style="font-size:0.72rem;color:var(--muted);margin-bottom:12px">IND 4 (Margen por Ruta) sin datos disponibles en el periodo</div>';
-cumplH += '<div class="cumpl-items">';
-results.forEach((r, i) => {
-  const st = cumple(i);
-  const cls = st === 'ok' ? 'ci-ok' : st === 'fail' ? 'ci-fail' : 'ci-na';
-  const lbl = st === 'ok' ? 'CUMPLE' : st === 'fail' ? 'NO CUMPLE' : 'SIN DATOS';
-  cumplH += '<div class="ci '+cls+'"><span class="dot"></span>IND '+(i+1)+': '+lbl+'</div>';
-});
-cumplH += '</div></div>';
-document.getElementById('cumplCard').innerHTML = cumplH;
-
-// KPIs
-const colors = ['blue','green','orange','red','purple'];
-let kpiH = '';
-results.forEach((r, i) => {
-  const v = r.val !== null ? r.val + '%' : 'N/A';
-  const st = cumple(i);
-  const stPill = st === 'ok' ? '<span class="g">✓ Cumple</span>' : st === 'fail' ? '<span class="r">✗ No cumple</span>' : '<span class="y">— Sin datos</span>';
-  kpiH += '<div class="kc '+colors[i]+'"><div class="kc-label">IND '+(i+1)+' — '+names[i]+'</div>';
-  kpiH += '<div class="kc-value">'+v+'</div>';
-  kpiH += '<div class="kc-sub">Meta: <b>'+metaLabels[i]+'</b> · '+stPill+'</div>';
-  if (r.val !== null) {
-    const pct = i === 3 ? Math.min(r.val / 30 * 100, 100) : r.val;
-    const bc = st === 'ok' ? '#10b981' : '#ef4444';
-    kpiH += '<div class="pbar"><div class="pbar-fill" style="width:'+Math.round(pct)+'%;background:'+bc+'"></div></div>';
-  }
-  kpiH += '</div>';
-});
-document.getElementById('kpiRow').innerHTML = kpiH;
-
-// CHART 1: Bar — Resultado vs Meta
-const ch1Vals = results.map(r => r.val !== null ? r.val : 0);
-new Chart(document.getElementById('ch1'), {
-  type: 'bar',
-  data: {
-    labels: ['IND 1','IND 2','IND 3','IND 4','IND 5'],
-    datasets: [
-      {label:'Resultado', data: ch1Vals, backgroundColor: ch1Vals.map((v,i) => cumple(i)==='ok' ? 'rgba(16,185,129,0.7)' : cumple(i)==='fail' ? 'rgba(239,68,68,0.7)' : 'rgba(100,116,139,0.3)'), borderRadius: 6, barThickness: 36},
-      {label:'Meta', data: metas, backgroundColor: 'rgba(255,255,255,0.06)', borderRadius: 6, barThickness: 36, borderWidth: 1, borderColor: 'rgba(255,255,255,0.12)'}
-    ]
-  },
-  options: {responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'top',labels:{padding:12,usePointStyle:true,pointStyle:'circle'}},tooltip:{...TP,callbacks:{label:c=>c.dataset.label+': '+c.parsed.y+'%'}}}, scales:{y:{beginAtZero:true,max:110,grid:GY,ticks:{callback:v=>v+'%'}},x:{grid:NG}}}
-});
-
-// CHART 2: Doughnut — Cumplimiento
-const failCount = results.filter((r, i) => cumple(i) === 'fail').length;
-const naCount = results.filter((r, i) => cumple(i) === 'na').length;
-new Chart(document.getElementById('ch2'), {
-  type: 'doughnut',
-  data: {
-    labels: ['Cumple','No Cumple','Sin Datos'],
-    datasets: [{data:[cumpleCount, failCount, naCount], backgroundColor:['#10b981','#ef4444','#334155'], borderWidth:0}]
-  },
-  options: {responsive:true, maintainAspectRatio:false, cutout:'65%', plugins:{legend:{position:'bottom',labels:{padding:16,usePointStyle:true,pointStyle:'circle'}},tooltip:TP}}
-});
-
-// CHART 3: IND1 — Cuentas Críticas
-new Chart(document.getElementById('ch3'), {
-  type: 'doughnut',
-  data: {
-    labels: ['OK ('+DATA.ind1.ok+')','Falta ('+DATA.ind1.falta+')','Sin Analizar ('+(DATA.ind1.totalCtas-DATA.ind1.analizadas)+')'],
-    datasets: [{data:[DATA.ind1.ok, DATA.ind1.falta, DATA.ind1.totalCtas-DATA.ind1.analizadas], backgroundColor:['#10b981','#ef4444','#334155'], borderWidth:0}]
-  },
-  options: {responsive:true, maintainAspectRatio:false, cutout:'60%', plugins:{legend:{position:'bottom',labels:{padding:10,usePointStyle:true,pointStyle:'circle',font:{size:10}}},tooltip:TP}}
-});
-
-// CHART 4: IND2 — Categorías
-new Chart(document.getElementById('ch4'), {
-  type: 'bar',
-  data: {
-    labels: DATA.ind2.categorias.map(c => c.cat.length > 18 ? c.cat.substring(0,18)+'...' : c.cat),
-    datasets: [{data: DATA.ind2.categorias.map(c => c.cant), backgroundColor: CL.map(c => c+'BB'), borderRadius: 5}]
-  },
-  options: {responsive:true, maintainAspectRatio:false, indexAxis:'y', plugins:{legend:{display:false},tooltip:TP}, scales:{x:{beginAtZero:true,grid:GY,ticks:{stepSize:5}},y:{grid:NG,ticks:{font:{size:9}}}}}
-});
-
-// CHART 5: IND3 — Control
-new Chart(document.getElementById('ch5'), {
-  type: 'doughnut',
-  data: {
-    labels: ['Controlados (97)','No Controlados (0)'],
-    datasets: [{data:[97, 0], backgroundColor:['#10b981','#ef4444'], borderWidth:0}]
-  },
-  options: {responsive:true, maintainAspectRatio:false, cutout:'60%', plugins:{legend:{position:'bottom',labels:{padding:10,usePointStyle:true,pointStyle:'circle',font:{size:10}}},tooltip:TP}}
-});
-
-// TABLE IND 1
-let tb1H = '';
-DATA.ind1.cuentasCriticas.forEach(c => {
-  const det = DATA.ind1.detalle.find(d => String(d.cuenta).startsWith(String(c.num)));
-  const st = det ? (det.estado === 'OK' ? '<span class="pill pill-green">OK</span>' : '<span class="pill pill-red">FALTA</span>') : '<span class="pill pill-gray">SIN ANALIZAR</span>';
-  const glosa = det ? det.glosa : '—';
-  const desc2 = det ? det.desc : '—';
-  tb1H += '<tr><td class="mono" style="color:var(--accent)">'+c.num+'</td><td>'+c.desc+'</td><td>'+glosa+'</td><td>'+st+'</td></tr>';
-});
-DATA.ind1.detalle.forEach(d => {
-  const exists = DATA.ind1.cuentasCriticas.find(c => String(d.cuenta).startsWith(String(c.num)));
-  if (!exists) {
-    const st = d.estado === 'OK' ? '<span class="pill pill-green">OK</span>' : '<span class="pill pill-red">FALTA</span>';
-    tb1H += '<tr><td class="mono" style="color:var(--accent)">'+d.cuenta+'</td><td>'+d.desc+'</td><td>'+d.glosa+'</td><td>'+st+'</td></tr>';
-  }
-});
-document.getElementById('tbInd1').innerHTML = tb1H;
-
-// TABLE IND 2
-let tb2H = '';
-DATA.ind2.categorias.forEach((c, i) => {
-  const pct = Math.round(c.cant / 97 * 1000) / 10;
-  tb2H += '<tr><td><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:'+CL[i]+';margin-right:8px"></span>'+c.cat+'</td><td class="mono">'+c.cant+'</td><td class="mono">'+pct+'%</td></tr>';
-});
-tb2H += '<tr style="font-weight:600"><td>Total</td><td class="mono">97</td><td class="mono">100%</td></tr>';
-document.getElementById('tbInd2').innerHTML = tb2H;
-
-// TABLE IND 5
-let tb5H = '';
-DATA.ind5.reportes.forEach(r => {
-  tb5H += '<tr><td class="mono" style="color:var(--accent)">'+r.num+'</td><td>'+r.desc+'</td><td class="mono">'+r.fecha+'</td><td><span class="pill pill-green">EMITIDO</span></td></tr>';
-});
-document.getElementById('tbInd5').innerHTML = tb5H;
-
-// TABLE MATRIZ
-let tbMH = '';
-results.forEach((r, i) => {
-  const v = r.val !== null ? r.val + '%' : 'N/A';
-  const st = cumple(i);
-  const pillCls = st === 'ok' ? 'pill-green' : st === 'fail' ? 'pill-red' : 'pill-gray';
-  const pillLbl = st === 'ok' ? 'CUMPLE' : st === 'fail' ? 'NO CUMPLE' : 'SIN DATOS';
-  tbMH += '<tr><td class="mono" style="color:'+CL[i]+'">IND '+(i+1)+'</td><td>'+names[i]+'</td><td style="font-size:0.62rem;color:var(--muted);max-width:200px;white-space:normal">'+formulas[i]+'</td><td class="mono">'+r.num+'</td><td class="mono">'+r.den+'</td><td class="mono" style="font-weight:700;color:'+(st==='ok'?'#34d399':st==='fail'?'#f87171':'var(--muted)')+'">'+v+'</td><td>'+metaLabels[i]+'</td><td><span class="pill '+pillCls+'">'+pillLbl+'</span></td></tr>';
-});
-document.getElementById('tbMatriz').innerHTML = tbMH;
-
-// FUNCIONES
-const funciones = [
-  {icon:'📊',title:'Análisis de Cuentas Críticas',desc:'Revisión y conciliación de cuentas contables críticas. Identificación de partidas inusuales, verificación de saldos y documentación de hallazgos.',color:'var(--accent)',tag:'IND 1',tagBg:'rgba(59,130,246,0.15)'},
-  {icon:'📋',title:'Depreciación Correcta',desc:'Evaluación de tasas y métodos de depreciación según NIC 16. Verificación de vida útil y valor residual de cada activo fijo de la empresa.',color:'var(--success)',tag:'IND 2',tagBg:'rgba(16,185,129,0.15)'},
-  {icon:'🏗️',title:'Control de Activos Fijos',desc:'Inventario físico y control documental. Verificación de existencia, estado, ubicación y asignación de custodio responsable de cada activo.',color:'var(--warn)',tag:'IND 3',tagBg:'rgba(245,158,11,0.15)'},
-  {icon:'🚛',title:'Margen por Ruta',desc:'Análisis de rentabilidad por ruta de transporte. Cálculo de ingresos vs costos operativos para determinar margen de contribución mínimo del 15%.',color:'var(--danger)',tag:'IND 4',tagBg:'rgba(239,68,68,0.15)'},
-  {icon:'📑',title:'Reportes Analíticos',desc:'Elaboración y entrega oportuna de reportes contables: compras, ventas, cierre mensual, análisis de variaciones y reportes de costos.',color:'var(--accent2)',tag:'IND 5',tagBg:'rgba(99,102,241,0.15)'}
-];
-let funcH = '';
-funciones.forEach(f => {
-  funcH += '<div class="func-card"><div class="func-icon">'+f.icon+'</div><h4 style="color:'+f.color+'">'+f.title+'</h4><p>'+f.desc+'</p><span class="func-tag" style="background:'+f.tagBg+';color:'+f.color+'">'+f.tag+'</span></div>';
-});
-document.getElementById('funcGrid').innerHTML = funcH;
+IND.forEach(d=>{d.val=d.den>0?Math.round(d.num/d.den*1000)/10:0;d.ok=d.id==='IND 4'?d.val>=d.meta:d.val>=d.meta});
+const cumple=IND.filter(d=>d.ok).length;const cumplPct=Math.round(IND.reduce((s,d)=>s+d.val,0)/IND.length*10)/10;const metaAvg=Math.round(IND.reduce((s,d)=>s+d.meta,0)/IND.length*10)/10;
+document.getElementById('upd').textContent='Últ. actualización: '+new Date().toLocaleDateString('es-PE');
+document.getElementById('gen').textContent=new Date().toLocaleString('es-PE');
+const hc=cumplPct>=80?'#10b981':'#f59e0b';const r=44,circ=2*Math.PI*r,off=circ-(cumplPct/100)*circ;
+let h='<div class="ring"><svg viewBox="0 0 110 110"><circle class="bg" cx="55" cy="55" r="'+r+'"/><circle class="v" cx="55" cy="55" r="'+r+'" stroke="'+hc+'" stroke-dasharray="'+circ+'" stroke-dashoffset="'+off+'"/></svg><span class="ring-pct" style="color:'+hc+'">'+cumplPct+'%</span></div>';
+h+='<div class="hero-body"><h2>Cumplimiento: <span style="color:'+hc+'">'+cumplPct+'%</span> <span style="font-size:0.75rem;color:var(--m2)">(Meta promedio: '+metaAvg+'%)</span></h2>';
+h+='<p>Promedio de resultados: '+cumplPct+'% vs Meta promedio: '+metaAvg+'% · '+cumple+' de 5 indicadores cumplen su meta individual</p><div class="chips">';
+IND.forEach(d=>{h+='<div class="chip '+(d.ok?'c-ok':'c-ng')+'"><span class="d"></span>'+d.id+': '+(d.ok?'CUMPLE '+d.val+'%':'NO CUMPLE '+d.val+'%')+'</div>'});
+h+='</div></div>';document.getElementById('hero').innerHTML=h;
+let kh='';IND.forEach((d,i)=>{const st=d.ok?'<span class="g">✓ Cumple</span>':'<span class="r">✗ No cumple</span>';const pct=i===3?Math.min(d.val/100*100,100):d.val;const bc=d.ok?'#10b981':'#ef4444';kh+='<div class="kc '+d.cls+'"><div class="kc-l">'+d.id+' — '+d.name+'</div><div class="kc-v">'+d.val+'%</div><div class="kc-s">Meta: <b>'+d.metaL+'</b> · '+st+'</div><div class="pb"><div class="pb-f" style="width:'+Math.round(pct)+'%;background:'+bc+'"></div></div></div>'});
+document.getElementById('kpi').innerHTML=kh;
+new Chart(document.getElementById('c1'),{type:'bar',data:{labels:IND.map(d=>d.id),datasets:[{label:'Resultado',data:IND.map(d=>d.val),backgroundColor:IND.map(d=>d.ok?'rgba(16,185,129,0.7)':'rgba(239,68,68,0.7)'),borderRadius:6,barThickness:32},{label:'Meta',data:IND.map(d=>d.meta),backgroundColor:'rgba(255,255,255,0.06)',borderRadius:6,barThickness:32,borderWidth:1,borderColor:'rgba(255,255,255,0.12)'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{padding:12,usePointStyle:true,pointStyle:'circle'}},tooltip:{...TP,callbacks:{label:c=>c.dataset.label+': '+c.parsed.y+'%'}}},scales:{y:{beginAtZero:true,max:110,grid:GY,ticks:{callback:v=>v+'%'}},x:{grid:NG}}}});
+new Chart(document.getElementById('c2'),{type:'doughnut',data:{labels:['Cumple ('+cumple+')','No Cumple ('+(5-cumple)+')'],datasets:[{data:[cumple,5-cumple],backgroundColor:['#10b981','#ef4444'],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{position:'bottom',labels:{padding:16,usePointStyle:true,pointStyle:'circle'}},tooltip:TP}}});
+new Chart(document.getElementById('c3'),{type:'doughnut',data:{labels:['OK (3)','Falta (5)','Sin Analizar (6)'],datasets:[{data:[3,5,6],backgroundColor:['#10b981','#ef4444','#334155'],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,cutout:'58%',plugins:{legend:{position:'bottom',labels:{padding:8,usePointStyle:true,pointStyle:'circle',font:{size:10}}},tooltip:TP}}});
+const cats=[{c:'Uds. Transporte',n:37},{c:'Llantas',n:23},{c:'Eq. Cómputo',n:15},{c:'Eq. Telecom.',n:9},{c:'Repuestos',n:8},{c:'Muebles',n:5}];
+new Chart(document.getElementById('c4'),{type:'bar',data:{labels:cats.map(c=>c.c),datasets:[{data:cats.map(c=>c.n),backgroundColor:CL.map(c=>c+'BB'),borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},tooltip:TP},scales:{x:{beginAtZero:true,grid:GY},y:{grid:NG,ticks:{font:{size:9}}}}}});
+const rutas=[{r:'CUZCO → NAZCA',v:23,f:297836,c:47574,m:84.0},{r:'NAZCA → LIMA',v:44,f:197732,c:73908,m:62.6},{r:'TRUJILLO → LIMA',v:4,f:26847,c:7458,m:72.2},{r:'AREQUIPA → NAZCA',v:6,f:22401,c:10103,m:54.9},{r:'LIMA → ICA',v:1,f:1893,c:0,m:100}];
+new Chart(document.getElementById('c5'),{type:'bar',data:{labels:rutas.map(r=>r.r),datasets:[{data:rutas.map(r=>r.m),backgroundColor:rutas.map(r=>'rgba(16,185,129,0.7)'),borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},tooltip:{...TP,callbacks:{label:c=>'Margen: '+c.parsed.x.toFixed(1)+'%'}}},scales:{x:{beginAtZero:true,max:110,grid:GY,ticks:{callback:v=>v+'%'}},y:{grid:NG,ticks:{font:{size:9}}}}}});
+const conds=[{n:'ESPINO TOLEDO',m:81.4,f:31629},{n:'TAPIA QUISPE',m:81.2,f:31081},{n:'VASQUEZ GABRIEL',m:81.0,f:35996},{n:'ROJAS QUISPE',m:80.5,f:22043},{n:'VELARDE CARDENAS',m:78.6,f:32818},{n:'PEREZ BAUTISTA',m:78.2,f:35355},{n:'RIPAS GUILLEN',m:78.1,f:31885},{n:'JURADO GUILLEN',m:77.5,f:22146},{n:'HUAYTA QUISPE',m:76.9,f:22373},{n:'TORRICO ARIAS',m:76.8,f:36047}];
+new Chart(document.getElementById('c6'),{type:'bar',data:{labels:conds.map(c=>c.n),datasets:[{label:'Margen %',data:conds.map(c=>c.m),backgroundColor:'rgba(16,185,129,0.6)',borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},tooltip:{...TP,callbacks:{label:c=>'Margen: '+c.parsed.x.toFixed(1)+'% · Fac: S/.'+(conds[c.dataIndex].f/1000).toFixed(1)+'K'}}},scales:{x:{beginAtZero:true,max:100,grid:GY,ticks:{callback:v=>v+'%'}},y:{grid:NG,ticks:{font:{size:9}}}}}});
+new Chart(document.getElementById('c7'),{type:'doughnut',data:{labels:['Margen Neto S/.407K','Viáticos S/.70K','Gastos Oper. S/.69K'],datasets:[{data:[407321,70200,69188],backgroundColor:['#10b981','#f59e0b','#ef4444'],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{position:'bottom',labels:{padding:12,usePointStyle:true,pointStyle:'circle',font:{size:10}}},tooltip:{...TP,callbacks:{label:c=>'S/. '+c.parsed.toLocaleString('es-PE',{maximumFractionDigits:0})}}}}});
+const crit=[{n:10,d:'Efectivo y equivalentes'},{n:12,d:'Ctas por cobrar comerciales'},{n:14,d:'Ctas por cobrar al personal'},{n:16,d:'Ctas por cobrar diversas'},{n:18,d:'Servicios contratados anticipado'},{n:33,d:'Inmuebles, maq. y equipo'},{n:34,d:'Intangibles'},{n:37,d:'Activo diferido'},{n:39,d:'Depreciación y amortización'},{n:40,d:'Tributos y aportes'},{n:41,d:'Remuneraciones por pagar'},{n:42,d:'Ctas pagar comerciales'},{n:44,d:'Ctas pagar a socios'},{n:46,d:'Ctas pagar diversas'}];
+const det1=[{c:'101101',d:'CAJA',g:'CAJA CHICA',e:'OK'},{c:'122102',d:'ANTICIPOS CLIENTES M.E.',g:'DEVOL. PARTE SINIESTRO',e:'FALTA'},{c:'141101',d:'PRÉSTAMOS PERSONAL M.N.',g:'PRÉSTAMO AL PERSONAL',e:'OK'},{c:'141301',d:'ENTREGAS A RENDIR CUENTA',g:'VIÁTICOS AL PERSONAL',e:'OK'},{c:'182105',d:'SEGURO VEHICULAR',g:'DIVEIMPORT',e:'FALTA'},{c:'373102',d:'INTERÉS DIFERIDOS',g:'DIVEIMPORT',e:'FALTA'},{c:'421202',d:'FACTURAS POR PAGAR M.E.',g:'VOLTRAILER',e:'FALTA'},{c:'461102',d:'RECLAMACIONES TERCEROS M.E.',g:'DIVEIMPORT',e:'FALTA'}];
+let t1='';crit.forEach(c=>{const dx=det1.find(d=>d.c.startsWith(String(c.n)));const st=dx?(dx.e==='OK'?'<span class="pill p-gn">OK</span>':'<span class="pill p-rd">FALTA</span>'):'<span class="pill p-gy">SIN ANALIZAR</span>';t1+='<tr><td class="mn" style="color:var(--a)">'+c.n+'</td><td>'+c.d+'</td><td>'+(dx?dx.g:'—')+'</td><td>'+st+'</td></tr>'});
+document.getElementById('t1').innerHTML=t1;
+let t2='';cats.forEach((c,i)=>{t2+='<tr><td><span style="display:inline-block;width:7px;height:7px;border-radius:2px;background:'+CL[i]+';margin-right:6px"></span>'+c.c+'</td><td class="mn">'+c.n+'</td><td class="mn">'+Math.round(c.n/97*1000)/10+'%</td></tr>'});
+t2+='<tr style="font-weight:600"><td>Total</td><td class="mn">97</td><td class="mn">100%</td></tr>';document.getElementById('t2').innerHTML=t2;
+document.getElementById('t5').innerHTML='<tr><td class="mn" style="color:var(--a)">1</td><td>Reporte de Compras Diciembre 2025</td><td class="mn">16/03/2026</td><td><span class="pill p-gn">EMITIDO</span></td></tr><tr><td class="mn" style="color:var(--a)">2</td><td>Reporte de Ventas Diciembre 2025</td><td class="mn">16/03/2026</td><td><span class="pill p-gn">EMITIDO</span></td></tr>';
+let t4='';rutas.forEach(r=>{const mg=r.f-r.c;t4+='<tr><td>'+r.r+'</td><td class="mn">'+r.v+'</td><td class="mn">S/. '+(r.f/1000).toFixed(1)+'K</td><td class="mn">S/. '+(r.c/1000).toFixed(1)+'K</td><td class="mn">S/. '+(mg/1000).toFixed(1)+'K</td><td class="mn" style="font-weight:700;color:#34d399">'+r.m.toFixed(1)+'%</td><td><span class="pill p-gn">CUMPLE</span></td></tr>'});
+t4+='<tr style="font-weight:700;border-top:2px solid var(--a)"><td>TOTAL</td><td class="mn">78</td><td class="mn">S/. 546.7K</td><td class="mn">S/. 139.4K</td><td class="mn" style="color:#34d399">S/. 407.3K</td><td class="mn" style="color:#34d399">74.5%</td><td><span class="pill p-gn">CUMPLE</span></td></tr>';
+document.getElementById('t4').innerHTML=t4;
+let tm='';IND.forEach((d,i)=>{const pc=d.ok?'p-gn':'p-rd';const lb=d.ok?'CUMPLE':'NO CUMPLE';const nF=i===3?'S/. '+(d.num/1000).toFixed(1)+'K':d.num;const dF=i===3?'S/. '+(d.den/1000).toFixed(1)+'K':d.den;tm+='<tr><td class="mn" style="color:'+CL[i]+'">'+d.id+'</td><td>'+d.name+'</td><td style="font-size:0.58rem;color:var(--m);max-width:170px;white-space:normal">'+d.formula+'</td><td class="mn">'+nF+'</td><td class="mn">'+dF+'</td><td class="mn" style="font-weight:700;color:'+(d.ok?'#34d399':'#f87171')+'">'+d.val+'%</td><td>'+d.metaL+'</td><td><span class="pill '+pc+'">'+lb+'</span></td></tr>'});
+document.getElementById('tm').innerHTML=tm;
+const fns=[{i:'📊',t:'Análisis de Cuentas Críticas',p:'Revisión de 14 cuentas contables críticas. 8 analizadas, 3 OK, 5 pendientes (Diveimport, Voltrailer).',c:'var(--a)'},{i:'📋',t:'Depreciación Correcta',p:'97 activos evaluados con depreciación correcta según NIC 16: transporte, llantas, equipos, muebles.',c:'var(--ok)'},{i:'🏗️',t:'Control de Activos Fijos',p:'97 activos inventariados y controlados: 37 transporte, 23 llantas, 15 cómputo, 9 telecom, 8 repuestos, 5 muebles.',c:'var(--w)'},{i:'🚛',t:'Margen por Ruta',p:'78 viajes analizados. Facturación S/.546.7K, costos S/.139.4K. Margen global 74.5% (meta ≥15%).',c:'var(--ng)'},{i:'📑',t:'Reportes Analíticos',p:'2 reportes emitidos el 16/03/2026: Compras y Ventas Diciembre 2025. Cumplimiento al 100%.',c:'var(--a2)'}];
+let fh='';fns.forEach((f,i)=>{fh+='<div class="fc"><div style="font-size:1.1rem;margin-bottom:6px">'+f.i+'</div><h4 style="color:'+f.c+'">'+f.t+'</h4><p>'+f.p+'</p><span style="display:inline-block;font-size:0.56rem;padding:2px 7px;border-radius:4px;font-weight:600;margin-top:6px;background:rgba(255,255,255,0.05);color:'+f.c+'">IND '+(i+1)+'</span></div>'});
+document.getElementById('funcs').innerHTML=fh;
 </script>
 </body>
 </html>
